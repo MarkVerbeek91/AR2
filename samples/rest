@@ -1,0 +1,8 @@
+(S'##BEGINNING OF PROGRAM##'
+p0
+S'Move J  J1) 7525  J2) 4613  J3) 1  J4) 5800  J5) 2200  J6) 6750  Speed-80 Ad 10 As 25 Dd 25 Ds 10'
+p1
+S'Return'
+p2
+tp3
+.
