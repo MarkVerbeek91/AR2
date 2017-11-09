@@ -1,6 +1,15 @@
 """ 
 """
 
+import gui
+import joint
+import serial_communication
+import controller
+import programmer
+
+import sys
+
+import time
 
 if sys.platform == 'win32':
   PLATFORM = 'pc'
@@ -14,13 +23,16 @@ elif sys.platform == 'linux':
   """ Set variables for pi env
   """
   
-def main()
+def main():
   """
   """
   
+  GUI = gui.GuiAR2()
+  GUI.CreateTab1()
   
+  GUI.start()
   
 
-if __name__ == "__main__"
+if __name__ == "__main__":
   main()
   

@@ -1,4 +1,4 @@
 """ """
 
-class programmer():
+class Programmer():
   pass

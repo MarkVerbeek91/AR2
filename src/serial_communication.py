@@ -4,15 +4,15 @@
 
 import serial
 
-class serial_communication():
+class Serial_communication():
   """ """
 
-  def __init__(self):
+  def __init__(self, port_number):
     """ """
 
     self.serial_com  = []
     self.is_active   = False
-    self.port_number = -1
+    self.port_number = port_number
 
   def close(self):
     if self.is_active:
