@@ -4,3 +4,6 @@
 __pycache__/
 *.py[cod]
 .cache/
+
+# other python files
+MANIFEST
