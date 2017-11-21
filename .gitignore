@@ -7,3 +7,6 @@ __pycache__/
 
 # other python files
 MANIFEST
+
+# documents files
+build
