@@ -23,3 +23,20 @@ How the math works: [Kinematic Videos](https://youtu.be/FIx6olybAeQ)
 Questions: chris.annin@gmail.com
 #
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/ChrisAnnin)
+
+## Notes by Mark
+
+A new stucture file and folder is created by Mark to allow for better version control and extenteded features. 
+
+Explanation of the file stucture: 
+- build: contains the lastest stable executable version the AR2 control interface and arduino binairy. 
+- CAD: contains the STEP files which can be imported into almost all CAD programs. 
+- conf: contains configuration and calibration files. 
+- docs: contrains the PDF documentation and the reStructure Text files for documentation. 
+- images: contains images
+- samples: contains sample programs, position and movements
+- src: contains the python source files and build scripts. These can also be run just like the files in 'build'.
+- src_arduino: contrains the c-file for the arduino software. 
+- stl: contrains the latest export of the CAD files to the STL format for printing. 
+- tests: contains the unittest files and other tests. 
+
