@@ -10,6 +10,8 @@ except ImportError:
 
 import programmer  
 
+import time
+
 class GuiAR2():
   """
   The graphical interface of the robotic arm
@@ -50,8 +52,28 @@ class GuiAR2():
     
   def CreateTab1(self):
   
-    prog = programmer.Programmer()
     tab1 = self.tab1
+  
+    progName = "somefile"
+    ProgEntryField = Entry(tab1,width=20)
+    ProgEntryField.place(x=170, y=45)
+    
+    progframe=Frame(tab1)
+    progframe.place(x=7,y=174)
+    scrollbar = Scrollbar(progframe) 
+    scrollbar.pack(side=RIGHT, fill=Y)
+    tab1.progView = Listbox(progframe ,width=84,height=29, yscrollcommand=scrollbar.set)
+       
+    prog = programmer.Programmer(progName, tab1.progView)
+    
+    tab1.progView.bind('<<ListboxSelect>>', prog.progViewselect)
+    
+    time.sleep(.2)
+    for item in prog.Prog:
+      tab1.progView.insert(END,item) 
+    tab1.progView.pack()
+    scrollbar.config(command=tab1.progView.yview)
+    
     curRowLab = Label(self.tab1, text = "Current Row  = ")
     curRowLab.place(x=407, y=150)
 
