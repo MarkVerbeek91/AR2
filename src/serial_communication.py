@@ -1,8 +1,11 @@
 """ Class file for serial communication 
 
 """
-
-import serial
+try:
+  import serial
+except ImportError:
+  pass
+  # import Serial as serial
 
 class Serial_communication():
   """ """

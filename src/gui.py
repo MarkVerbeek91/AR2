@@ -1,9 +1,14 @@
 """
 """
 
-from tkinter import *
-from tkinter import ttk
+try:
+  from tkinter import *
+  from tkinter import ttk
+except ImportError:
+  from Tkinter import *
+  import ttk
 
+import programmer  
 
 class GuiAR2():
   """
@@ -44,6 +49,8 @@ class GuiAR2():
     self.tab1.mainloop()
     
   def CreateTab1(self):
+  
+    prog = programmer.Programmer()
     tab1 = self.tab1
     curRowLab = Label(self.tab1, text = "Current Row  = ")
     curRowLab.place(x=407, y=150)
@@ -136,36 +143,14 @@ class GuiAR2():
     XYZjogRobotLab = Label(tab1, text = "JOG ROBOT")
     XYZjogRobotLab.place(x=540, y=212)
 
-    waitTequalsLab = Label(tab1, text = "=")
-    waitTequalsLab.place(x=855, y=360)
+    for ii in range(360, 521, 40):
+      tmp = Label(tab1, text = "=")
+      tmp.place(x=855, y=ii)
 
-    waitIequalsLab = Label(tab1, text = "=")
-    waitIequalsLab.place(x=855, y=400)
+      tmp = Label(tab1, text = "=")
+      tmp.place(x=1075, y=360)
 
-    waitIoffequalsLab = Label(tab1, text = "=")
-    waitIoffequalsLab.place(x=855, y=440)
-
-    outputOnequalsLab = Label(tab1, text = "=")
-    outputOnequalsLab.place(x=855, y=480)
-
-    outputOffequalsLab = Label(tab1, text = "=")
-    outputOffequalsLab.place(x=855, y=520)
-
-    tabequalsLab = Label(tab1, text = "=")
-    tabequalsLab.place(x=1075, y=360)
-
-    jumpequalsLab = Label(tab1, text = "=")
-    jumpequalsLab.place(x=1075, y=400)
-
-    jumpIfOnequalsLab = Label(tab1, text = "=")
-    jumpIfOnequalsLab.place(x=1075, y=440)
-
-    jumpIfOffequalsLab = Label(tab1, text = "=")
-    jumpIfOffequalsLab.place(x=1075, y=480)
-
-    servoequalsLab = Label(tab1, text = "=")
-    servoequalsLab.place(x=1075, y=520)
-
+    
     changeProgequalsLab = Label(tab1, text = "=")
     changeProgequalsLab.place(x=695, y=560)
 
@@ -190,34 +175,35 @@ class GuiAR2():
     ###BUTTONS################################################################
     ##########################################################################
 
+    Buttons = {}
+    
+    foo = lambda: prog.manAddItem()
+    Buttons['manEnt'] = Button(tab1, bg="grey85", text="Enter Text", height=1, width=14, command=prog.manAddItem)
+    Buttons['manEnt'].place(x=795, y=641)
+    
+    Buttons['teachInsBut'] = Button(tab1, bg="grey85", text="Teach New Position", height=1, width=20, command = prog.teachInsertBelSelected)
+    Buttons['teachInsBut'].place(x=540, y=440)
 
+    Buttons['teachReplaceBut'] = Button(tab1, bg="grey85", text="Modify Position", height=1, width=20, command = prog.teachReplaceSelected)
+    Buttons['teachReplaceBut'].place(x=540, y=480)
 
-    # manEntBut = Button(tab1, bg="grey85", text="Enter Text", height=1, width=14, command = manAdditem)
-    # manEntBut.place(x=795, y=641)
+    Buttons['waitTimeBut'] = Button(tab1, bg="grey85", text="Wait Time (seconds)", height=1, width=20, command = prog.waitTime)
+    Buttons['waitTimeBut'].place(x=700, y=360)
 
-    # teachInsBut = Button(tab1, bg="grey85", text="Teach New Position", height=1, width=20, command = teachInsertBelSelected)
-    # teachInsBut.place(x=540, y=440)
+    Buttons['waitInputOnBut'] = Button(tab1, bg="grey85", text="Wait Input ON", height=1, width=20, command = prog.waitInputOn)
+    Buttons['waitInputOnBut'].place(x=700, y=400)
 
-    # teachReplaceBut = Button(tab1, bg="grey85", text="Modify Position", height=1, width=20, command = teachReplaceSelected)
-    # teachReplaceBut.place(x=540, y=480)
+    Buttons['waitInputOffBut'] = Button(tab1, bg="grey85", text="Wait Input OFF", height=1, width=20, command = prog.waitInputOff)
+    Buttons['waitInputOffBut'].place(x=700, y=440)
 
-    # waitTimeBut = Button(tab1, bg="grey85", text="Wait Time (seconds)", height=1, width=20, command = waitTime)
-    # waitTimeBut.place(x=700, y=360)
+    Buttons['setOutputOnBut'] = Button(tab1, bg="grey85", text="Set Output On", height=1, width=20, command = prog.setOutputOn)
+    Buttons['setOutputOnBut'].place(x=700, y=480)
 
-    # waitInputOnBut = Button(tab1, bg="grey85", text="Wait Input ON", height=1, width=20, command = waitInputOn)
-    # waitInputOnBut.place(x=700, y=400)
+    Buttons['setOutputOffBut'] = Button(tab1, bg="grey85", text="Set Output OFF", height=1, width=20, command = prog.setOutputOff)
+    Buttons['setOutputOffBut'].place(x=700, y=520)
 
-    # waitInputOffBut = Button(tab1, bg="grey85", text="Wait Input OFF", height=1, width=20, command = waitInputOff)
-    # waitInputOffBut.place(x=700, y=440)
-
-    # setOutputOnBut = Button(tab1, bg="grey85", text="Set Output On", height=1, width=20, command = setOutputOn)
-    # setOutputOnBut.place(x=700, y=480)
-
-    # setOutputOffBut = Button(tab1, bg="grey85", text="Set Output OFF", height=1, width=20, command = setOutputOff)
-    # setOutputOffBut.place(x=700, y=520)
-
-    # tabNumBut = Button(tab1, bg="grey85", text="Create Tab Number", height=1, width=20, command = tabNumber)
-    # tabNumBut.place(x=920, y=360)
+    Buttons['tabNumBut'] = Button(tab1, bg="grey85", text="Create Tab Number", height=1, width=20, command = prog.tabNumber)
+    Buttons['tabNumBut'].place(x=920, y=360)
 
     # jumpTabBut = Button(tab1, bg="grey85", text="Jump to Tab", height=1, width=20, command = jumpTab)
     # jumpTabBut.place(x=920, y=400)
@@ -357,115 +343,116 @@ class GuiAR2():
     ####ENTRY FIELDS##########################################################
     ##########################################################################
 
+    entryField = {}
 
+    entryField['Current Row'] = Entry(tab1, width=5)
+    entryField['Current Row'].place(x=497, y=150)
+    # curRowEntryField.place(x=497, y=150)
 
-    curRowEntryField = Entry(tab1,width=5)
-    curRowEntryField.place(x=497, y=150)
+    entryField['man'] = Entry(tab1, width=5)
+    entryField['man'].place(x=540, y=645)
+    
+    entryField['Prog'] = Entry(tab1, width=20)
+    entryField['Prog'].place(x=70, y=45)
+    
+    entryField['comPort'] = Entry(tab1,width=2)
+    entryField['comPort'].place(x=80, y=10)
 
-    manEntryField = Entry(tab1,width=40)
-    manEntryField.place(x=540, y=645)
+    entryField['speed'] = Entry(tab1,width=3)
+    entryField['speed'].place(x=540, y=360)
+    
+    # ACCdurField = Entry(tab1,width=3)
+    # ACCdurField.place(x=540, y=385)
 
-    ProgEntryField = Entry(tab1,width=20)
-    ProgEntryField.place(x=70, y=45)
+    # DECdurField = Entry(tab1,width=3)
+    # DECdurField.place(x=540, y=410)
 
-    comPortEntryField = Entry(tab1,width=2)
-    comPortEntryField.place(x=80, y=10)
+    # ACCspeedField = Entry(tab1,width=3)
+    # ACCspeedField.place(x=565, y=385)
 
-    speedEntryField = Entry(tab1,width=3)
-    speedEntryField.place(x=540, y=360)
+    # DECspeedField = Entry(tab1,width=3)
+    # DECspeedField.place(x=565, y=410)
 
-    ACCdurField = Entry(tab1,width=3)
-    ACCdurField.place(x=540, y=385)
+    # waitTimeEntryField = Entry(tab1,width=5)
+    # waitTimeEntryField.place(x=872, y=363)
 
-    DECdurField = Entry(tab1,width=3)
-    DECdurField.place(x=540, y=410)
+    # waitInputEntryField = Entry(tab1,width=5)
+    # waitInputEntryField.place(x=872, y=403)
 
-    ACCspeedField = Entry(tab1,width=3)
-    ACCspeedField.place(x=565, y=385)
+    # waitInputOffEntryField = Entry(tab1,width=5)
+    # waitInputOffEntryField.place(x=872, y=443)
 
-    DECspeedField = Entry(tab1,width=3)
-    DECspeedField.place(x=565, y=410)
+    # outputOnEntryField = Entry(tab1,width=5)
+    # outputOnEntryField.place(x=872, y=483)
 
-    waitTimeEntryField = Entry(tab1,width=5)
-    waitTimeEntryField.place(x=872, y=363)
+    # outputOffEntryField = Entry(tab1,width=5)
+    # outputOffEntryField.place(x=872, y=523)
 
-    waitInputEntryField = Entry(tab1,width=5)
-    waitInputEntryField.place(x=872, y=403)
+    # tabNumEntryField = Entry(tab1,width=5)
+    # tabNumEntryField.place(x=1092, y=363)
 
-    waitInputOffEntryField = Entry(tab1,width=5)
-    waitInputOffEntryField.place(x=872, y=443)
+    # jumpTabEntryField = Entry(tab1,width=5)
+    # jumpTabEntryField.place(x=1092, y=403)
 
-    outputOnEntryField = Entry(tab1,width=5)
-    outputOnEntryField.place(x=872, y=483)
+    # IfOnjumpInputTabEntryField = Entry(tab1,width=5)
+    # IfOnjumpInputTabEntryField.place(x=1092, y=443)
 
-    outputOffEntryField = Entry(tab1,width=5)
-    outputOffEntryField.place(x=872, y=523)
+    # IfOnjumpNumberTabEntryField = Entry(tab1,width=5)
+    # IfOnjumpNumberTabEntryField.place(x=1132, y=443)
 
-    tabNumEntryField = Entry(tab1,width=5)
-    tabNumEntryField.place(x=1092, y=363)
+    # IfOffjumpInputTabEntryField = Entry(tab1,width=5)
+    # IfOffjumpInputTabEntryField.place(x=1092, y=483)
 
-    jumpTabEntryField = Entry(tab1,width=5)
-    jumpTabEntryField.place(x=1092, y=403)
+    # IfOffjumpNumberTabEntryField = Entry(tab1,width=5)
+    # IfOffjumpNumberTabEntryField.place(x=1132, y=483)
 
-    IfOnjumpInputTabEntryField = Entry(tab1,width=5)
-    IfOnjumpInputTabEntryField.place(x=1092, y=443)
+    # servoNumEntryField = Entry(tab1,width=5)
+    # servoNumEntryField.place(x=1092, y=523)
 
-    IfOnjumpNumberTabEntryField = Entry(tab1,width=5)
-    IfOnjumpNumberTabEntryField.place(x=1132, y=443)
+    # servoPosEntryField = Entry(tab1,width=5)
+    # servoPosEntryField.place(x=1132, y=523)
 
-    IfOffjumpInputTabEntryField = Entry(tab1,width=5)
-    IfOffjumpInputTabEntryField.place(x=1092, y=483)
+    # changeProgEntryField = Entry(tab1,width=12)
+    # changeProgEntryField.place(x=712, y=563)
 
-    IfOffjumpNumberTabEntryField = Entry(tab1,width=5)
-    IfOffjumpNumberTabEntryField.place(x=1132, y=483)
+    # R1EntryField = Entry(tab1,width=5)
+    # R1EntryField.place(x=1194, y=54)
 
-    servoNumEntryField = Entry(tab1,width=5)
-    servoNumEntryField.place(x=1092, y=523)
+    # R2EntryField = Entry(tab1,width=5)
+    # R2EntryField.place(x=1194, y=94)
 
-    servoPosEntryField = Entry(tab1,width=5)
-    servoPosEntryField.place(x=1132, y=523)
+    # R3EntryField = Entry(tab1,width=5)
+    # R3EntryField.place(x=1194, y=134)
 
-    changeProgEntryField = Entry(tab1,width=12)
-    changeProgEntryField.place(x=712, y=563)
+    # R4EntryField = Entry(tab1,width=5)
+    # R4EntryField.place(x=1194, y=174)
 
-    R1EntryField = Entry(tab1,width=5)
-    R1EntryField.place(x=1194, y=54)
+    # R5EntryField = Entry(tab1,width=5)
+    # R5EntryField.place(x=1269, y=54)
 
-    R2EntryField = Entry(tab1,width=5)
-    R2EntryField.place(x=1194, y=94)
+    # R6EntryField = Entry(tab1,width=5)
+    # R6EntryField.place(x=1269, y=94)
 
-    R3EntryField = Entry(tab1,width=5)
-    R3EntryField.place(x=1194, y=134)
+    # R7EntryField = Entry(tab1,width=5)
+    # R7EntryField.place(x=1269, y=134)
 
-    R4EntryField = Entry(tab1,width=5)
-    R4EntryField.place(x=1194, y=174)
+    # R8EntryField = Entry(tab1,width=5)
+    # R8EntryField.place(x=1269, y=174)
 
-    R5EntryField = Entry(tab1,width=5)
-    R5EntryField.place(x=1269, y=54)
+    # regNumEntryField = Entry(tab1,width=5)
+    # regNumEntryField.place(x=1080, y=563)
 
-    R6EntryField = Entry(tab1,width=5)
-    R6EntryField.place(x=1269, y=94)
+    # regEqEntryField = Entry(tab1,width=5)
+    # regEqEntryField.place(x=1132, y=563)
 
-    R7EntryField = Entry(tab1,width=5)
-    R7EntryField.place(x=1269, y=134)
+    # regNumJmpEntryField = Entry(tab1,width=5)
+    # regNumJmpEntryField.place(x=1080, y=603)
 
-    R8EntryField = Entry(tab1,width=5)
-    R8EntryField.place(x=1269, y=174)
+    # regEqJmpEntryField = Entry(tab1,width=5)
+    # regEqJmpEntryField.place(x=1132, y=603)
 
-    regNumEntryField = Entry(tab1,width=5)
-    regNumEntryField.place(x=1080, y=563)
-
-    regEqEntryField = Entry(tab1,width=5)
-    regEqEntryField.place(x=1132, y=563)
-
-    regNumJmpEntryField = Entry(tab1,width=5)
-    regNumJmpEntryField.place(x=1080, y=603)
-
-    regEqJmpEntryField = Entry(tab1,width=5)
-    regEqJmpEntryField.place(x=1132, y=603)
-
-    regTabJmpEntryField = Entry(tab1,width=5)
-    regTabJmpEntryField.place(x=1184, y=603)
+    # regTabJmpEntryField = Entry(tab1,width=5)
+    # regTabJmpEntryField.place(x=1184, y=603)
 
 
 
