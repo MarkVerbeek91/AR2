@@ -3,7 +3,7 @@
 
 import gui
 import joint
-import serial_communication
+
 import controller
 import programmer
 

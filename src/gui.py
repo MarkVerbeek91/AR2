@@ -62,7 +62,7 @@ class GuiAR2():
     progframe.place(x=7,y=174)
     scrollbar = Scrollbar(progframe) 
     scrollbar.pack(side=RIGHT, fill=Y)
-    tab1.progView = Listbox(progframe ,width=84,height=29, yscrollcommand=scrollbar.set)
+    tab1.progView = Listbox(progframe ,width=64,height=29, yscrollcommand=scrollbar.set)
        
     prog = programmer.Programmer(progName, tab1.progView)
     
@@ -241,9 +241,9 @@ class GuiAR2():
 
     # callBut = Button(tab1, bg="grey85", text="Call Program", height=1, width=20, command = insertCallProg)
     # callBut.place(x=540, y=560)
-
-    # returnBut = Button(tab1, bg="grey85", text="Return", height=1, width=20, command = insertReturn)
-    # returnBut.place(x=540, y=600)
+    pos = 1
+    Buttons['returnBut'] = Button(tab1, bg="grey85", text="Return", height=1, width=20, command=lambda pos=pos: prog.insertReturn(pos))
+    Buttons['returnBut'].place(x=540, y=600)
 
     # comPortBut = Button(tab1, bg="grey85", text="Set Com", height=0, width=7, command = setCom)
     # comPortBut.place(x=103, y=7)
@@ -476,20 +476,22 @@ class GuiAR2():
     # regTabJmpEntryField = Entry(tab1,width=5)
     # regTabJmpEntryField.place(x=1184, y=603)
 
-
-
+    joint_names = []
+    for ii in range(1,7):
+      joint_names.append('J' + str(ii))
     
-    for ii in range(1,7): 
-      self.currentAngleEntryField[ii] = Entry(tab1, width=5)
-      self.currentAngleEntryField[ii].place(x=660+(ii-1)*90, y=40)
+    self.currentAngleEntryField = {}
+    for ii, joint_name in enumerate(joint_names): 
+      self.currentAngleEntryField[joint_name] = Entry(tab1, width=5)
+      self.currentAngleEntryField[joint_name].place(x=660+(ii)*90, y=40)
       
-      self.jogDegreesEntryField[ii] = Entry(tab1,width=5)
-      self.jogDegreesEntryField[ii].place(x=660+(ii-1)*90, y=65)
+      # self.jogDegreesEntryField[ii] = Entry(tab1,width=5)
+      # self.jogDegreesEntryField[ii].place(x=660+(ii-1)*90, y=65)
  
 
-      self.currentPositionEntryField[ii] = Entry(tab1,width=5)
-      self.currentPositionEntryField[ii].place(x=660+(ii-1)*90, y=160)
+      # self.currentPositionEntryField[ii] = Entry(tab1,width=5)
+      # self.currentPositionEntryField[ii].place(x=660+(ii-1)*90, y=160)
       
-      self.jogPositionEntryField[ii] = Entry(tab1,width=5)
-      self.jogPositionEntryField[ii].place(x=660+(ii-1)*90, y=185)
+      # self.jogPositionEntryField[ii] = Entry(tab1,width=5)
+      # self.jogPositionEntryField[ii].place(x=660+(ii-1)*90, y=185)
       

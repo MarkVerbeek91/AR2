@@ -24,8 +24,14 @@ class Serial_communication():
       print('port was not open')
       
   @staticmethod
-  def setCom(self):
+  def open(self):
     """ """
     port = "COM" + self.port_number  
     baud = 9600 
     serial_com = serial.Serial(port, baud)
+
+  def send_command(self, command):
+    if command[-1:] == '\n':
+      self.serial_com.write(command)
+    else:
+      print("command not properly formatted")

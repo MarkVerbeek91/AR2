@@ -10,3 +10,4 @@ class Joint():
     self.CurrentStep        = 0
     self.CurrentAngle       = 0
     
+  
