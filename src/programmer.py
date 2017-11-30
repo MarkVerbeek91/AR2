@@ -9,16 +9,19 @@ class program_line():
     self.data = data
     self.comment = comment
     
-
+  def print_program_line(self):
+    
+    print("%s; %i; %s, %s" % (self.name, self.type, self.data, self.comment))
+    
 class Programmer():
 
-  def __init__(self, progView, progName):
+  def __init__(self, progName):
   
-    self.progView = progView
-    
     try:
+      print("Trying to open %s" % progName)
       self.Prog = pickle.load(open(progName,"rb"))
     except:
+      print("Program does not exist, creating new one")
       self.Prog = ['##BEGINNING OF PROGRAM##','Tab Number 1']
       
       try: 
@@ -27,6 +30,7 @@ class Programmer():
         pickle.dump(self.Prog,open("new","wb"))
     
     self.program = []
+    self.current_line = -1
   
   def add_command(self, new_cmd, var):
     if var == -1:
@@ -36,9 +40,18 @@ class Programmer():
   
   def remove_command(self, var):
     if var == -1:
-      self.program.pop()
+      try:
+        self.program.pop()
+      except: 
+        return -1
     else:
-      self.program.pop(var)
+      try:
+        self.program.pop(var)
+      except :
+        return -1
+  
+  def numberOfCommands(self):
+    return len(self.program)
   
   def manAddItem(self):
     print("hello")

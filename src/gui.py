@@ -64,7 +64,7 @@ class GuiAR2():
     scrollbar.pack(side=RIGHT, fill=Y)
     tab1.progView = Listbox(progframe ,width=64,height=29, yscrollcommand=scrollbar.set)
        
-    prog = programmer.Programmer(progName, tab1.progView)
+    prog = programmer.Programmer(progName)
     
     tab1.progView.bind('<<ListboxSelect>>', prog.progViewselect)
     

@@ -5,14 +5,14 @@ import sys
 
 sys.path.append('../src')
 
-from serial_communication import serial_coms
+import serial_communication as sc
 
 class serialTestCase(unittest.TestCase):
 
   def setUp(self):
     """ """
 
-    self.serial = serial_coms()
+    self.serial = sc.Serial_communication(5)
     
   def tearDown(self):
     """ """

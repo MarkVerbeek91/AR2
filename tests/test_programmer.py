@@ -18,20 +18,35 @@ class program_linteTestCAse(unittest.TestCase):
     self.assertEqual(prog_line.type, 'type')
     self.assertEqual(prog_line.data, 'data')
     self.assertEqual(prog_line.comment, 'comment')
+  
+  def test_program_line_print(self):
+    pass
     
+    # prog_line = program_line('name', 'type', 'data', 'comment')
+    
+    
+      
 
 class programmerTestCase(unittest.TestCase):
 
   def setUp(self):
     """ """
-
-    self.programmer = programmer.Programmer('', '')
+    print("\nCreating new programmer\n")
+    self.programmer = programmer.Programmer('')
     
 
     
   def test_class_init(self):
     """ """
-    pass
+    self.assertEqual(self.programmer.program, [])
+    
+    # open programmer no file exist
+    
+    # open programmer file exist
+    
+    # check for correct message
+    
+    
     
   def test_add_command(self):
     """ """
@@ -48,23 +63,32 @@ class programmerTestCase(unittest.TestCase):
     new_cmd = program_line('foo', 1, -1, 'baz')
     for ii in range(1,5):
       new_cmd.data = ii
+      new_cmd.print_program_line()
       self.programmer.add_command(new_cmd, -1)
+      
+  
+    self.assertEqual(self.programmer.numberOfCommands(),4)
+    
+    for ii in range(1,5):
+      print(self.programmer.program[ii-1].data)
+      self.assertEqual(self.programmer.program[ii-1].data, ii)
   
   def test_remove_command(self):
     """remove last command from program"""
 
+    self.assertEqual(self.programmer.remove_command(-1), -1)
     
-    for cmd in self.programmer.program:
-      print(cmd.data)
-    
-    
-    self.programmer.remove_command(-1)
+    # for cmd in self.programmer.program:
+      # print(cmd.data)
     
     
-    self.assertEqual(self.programmer.program[0].name, 'foo')
-    self.assertEqual(self.programmer.program[0].type, 1)
-    self.assertEqual(self.programmer.program[0].data, 3)
-    self.assertEqual(self.programmer.program[0].comment, 'baz')
+    
+    
+    
+    # self.assertEqual(self.programmer.program[0].name, 'foo')
+    # self.assertEqual(self.programmer.program[0].type, 1)
+    # self.assertEqual(self.programmer.program[0].data, 3)
+    # self.assertEqual(self.programmer.program[0].comment, 'baz')
     
     
     

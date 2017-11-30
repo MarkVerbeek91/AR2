@@ -4,7 +4,8 @@
 try:
   import serial
 except ImportError:
-  pass
+  print("opening alternative")
+  import serial_custom as serial
   # import Serial as serial
 
 class Serial_communication():
@@ -26,12 +27,12 @@ class Serial_communication():
   @staticmethod
   def open(self):
     """ """
-    port = "COM" + self.port_number  
+    port = "COM" + str(self.port_number)
     baud = 9600 
-    serial_com = serial.Serial(port, baud)
+    self.serial_com = serial.Serial(port, baud)
 
   def send_command(self, command):
     if command[-1:] == '\n':
-      self.serial_com.write(command)
+      return self.serial_com.write(command)
     else:
       print("command not properly formatted")
