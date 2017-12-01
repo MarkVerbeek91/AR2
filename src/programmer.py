@@ -12,6 +12,20 @@ class program_line():
   def print_program_line(self):
     
     print("%s; %i; %s, %s" % (self.name, self.type, self.data, self.comment))
+
+class movement():
+  def __init__(self, pos, vel, acc, type):
+    self.pos = pos
+    self.acc = acc
+    self.vel = vel
+    self.type = type
+    
+    self.ang = '' # calc angles 
+    
+    # TODO: type lineair movement
+    
+    # TODO: type sinus movement
+    
     
 class Programmer():
 
@@ -64,7 +78,6 @@ class Programmer():
     new_cmd = program_line('wait', 2, waitTime, 'seconds')
     add_command(new_cmd, pos)
     
-  
   def teachInsertBelSelected(self):
     pass
  

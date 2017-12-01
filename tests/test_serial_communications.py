@@ -23,7 +23,7 @@ class serialTestCase(unittest.TestCase):
     
     self.assertEqual(self.serial.serial_com, [])
     self.assertFalse(self.serial.is_active)
-    self.assertEqual(self.serial.port_number, -1)
+    self.assertEqual(self.serial.port_number, 5)
 
 if __name__ == '__main__':
     unittest.main()

@@ -11,6 +11,8 @@ import sys
 
 import time
 
+import pdb
+
 if sys.platform == 'win32':
   PLATFORM = 'pc'
   
@@ -26,6 +28,8 @@ elif sys.platform == 'linux':
 def main():
   """
   """
+  
+  # pdb.set_trace()
   
   GUI = gui.GuiAR2()
   GUI.CreateTab1()

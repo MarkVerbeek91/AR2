@@ -60,30 +60,32 @@ class programmerTestCase(unittest.TestCase):
   
   def test_add_command_multible(self):
     """ """
-    new_cmd = program_line('foo', 1, -1, 'baz')
+    
     for ii in range(1,5):
-      new_cmd.data = ii
-      new_cmd.print_program_line()
+      new_cmd = program_line('foo', 1, ii, 'baz')
       self.programmer.add_command(new_cmd, -1)
-      
-  
+ 
     self.assertEqual(self.programmer.numberOfCommands(),4)
     
     for ii in range(1,5):
-      print(self.programmer.program[ii-1].data)
+      
       self.assertEqual(self.programmer.program[ii-1].data, ii)
+    # self.assertEqual(self.programmer.program[1].data, 2)
+    # self.assertEqual(self.programmer.program[2].data, 3)
+    # self.assertEqual(self.programmer.program[3].data, 4)
   
   def test_remove_command(self):
     """remove last command from program"""
 
     self.assertEqual(self.programmer.remove_command(-1), -1)
+        
+    for ii in range(1,5):
+      new_cmd = program_line('foo', 1, ii, 'baz')
+      self.programmer.add_command(new_cmd, -1)    
     
-    # for cmd in self.programmer.program:
-      # print(cmd.data)
+    self.programmer.remove_command(-1)
     
-    
-    
-    
+    self.assertEqual(self.programmer.numberOfCommands(),3)
     
     # self.assertEqual(self.programmer.program[0].name, 'foo')
     # self.assertEqual(self.programmer.program[0].type, 1)

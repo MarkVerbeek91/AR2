@@ -5,7 +5,7 @@ import sys
 sys.path.append('../src')
 
 
-import ar2_gui
+from gui import GuiAR2
 
 def assert_gui_creation():
   """
@@ -15,7 +15,7 @@ def assert_gui_creation():
 def test_gui_creation():
   """
   """
-  ar2_gui_obj = ar2_gui.ar2_gui
+  ar2_gui_obj = GuiAR2.GuiAR2()
   
   assert True
   

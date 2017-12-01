@@ -17,8 +17,13 @@ class Controller():
     self.serCom.open(self.serCom)
     self.calibrated = False
     
-  def executeRow(self, program):
-    pass
+  def executeRow(self, program_line):
+    print(program_line.type)
+    
+    if program_line.type == 1:
+      print('executing something')
+    else:
+      print('not doing anything')
     
     
     

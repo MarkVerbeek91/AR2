@@ -21,8 +21,13 @@ class GuiAR2():
     self.root = Tk()
     self.root.wm_title("AR2 software 1.1")
     self.root.iconbitmap(r'icons/AR2.ico')
-    self.root.resizable(width=True, height=True)
-    self.root.geometry('1366x986+0+0')
+    self.root.resizable(width=False, height=False)
+    
+    screen_width = self.root.winfo_screenwidth()
+    screen_height = self.root.winfo_screenheight()
+    
+    
+    self.root.geometry(str(screen_width-10)+'x'+str(screen_height-40)+'+0+0')
 
     self.root.runTrue = 0
 
