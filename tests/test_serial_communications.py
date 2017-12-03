@@ -1,32 +1,30 @@
-""" pytest file
+""" unittest file
 """
+import unittest
 
 import sys
 
 sys.path.append('../src')
 
-from serial_communication import serial_coms
+import serial_communication as sc
 
+class serialTestCase(unittest.TestCase):
 
-def assert_open_port():
-  """ some comment
-  """
-  assert False
+  def setUp(self):
+    """ """
 
-def test_make_class():
-  """
-  """
+    self.serial = sc.Serial_communication(5)
+    
+  def tearDown(self):
+    """ """
+    self.serial.close()
+    
+  def test_class_init(self):
+    """ """
+    
+    self.assertEqual(self.serial.serial_com, [])
+    self.assertFalse(self.serial.is_active)
+    self.assertEqual(self.serial.port_number, 5)
 
-  serCom = serial_coms()
-  
-  assert True
-
-def test_class_init():
-  """
-  """
-  
-  serCom = serial_coms()
-  
-  assert serCom.serial_com == [] 
-  assert serCom.is_active  == False
-
+if __name__ == '__main__':
+    unittest.main()

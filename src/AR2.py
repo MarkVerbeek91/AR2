@@ -51,12 +51,19 @@ RE-WRITE OF MOVE SYNC ALGORITHM
 '''
 ##########################################################################
 
-from tkinter import *
-from tkinter import ttk
+try:
+  from tkinter import *
+  from tkinter import ttk
+  import queue
+except ImportError:
+  from Tkinter import *
+  import ttk
+  import Queue
+  
 import pickle
 import time
 import threading
-import queue
+
 import math
 # import ttk
 

@@ -7,9 +7,9 @@ class Joint():
     self.AngleLimitPositive = ALP
     self.StepLimitMin       = 0
     self.StepLimit          = SL    # maximum number of steps for range
-    self.DegreePerStep      = DPS
+    self._DegreePerStep     = DPS
     self.CurrentStep        = CS
-    self.CurrentAngle       = CA
+    self._CurrentAngle      = CA
     
   def jog_step(self, stepSize):
     if self.CurrentStep + stepSize < self.StepLimit and \
