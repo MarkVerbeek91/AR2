@@ -91,7 +91,7 @@ class Programmer():
     add_command(new_cmd, pos)
     
   def teachInsertBelSelected(self):
-    pass
+    print("gallo")
  
   def teachReplaceSelected(self):
     pass

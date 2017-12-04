@@ -1,0 +1,23 @@
+manEnt,14,1,795,641,grey85,Enter Text,manAddItem,
+teachInsBut,20,1,540,440,grey85,Teach New Position,teachInsertBelSelected
+teachReplaceBut,20,1,540,480,grey85,Modify Position,teachReplaceSelected
+waitTimeBut,20,1,700,360,grey85,Wait Time (seconds),waitTime
+waitInputOnBut,20,1,700,400,grey85,Wait Input ON,
+waitInputOffBut,20,1,700,440,grey85,Wait Input OFF,
+setOutputOnBut,20,1,700,480,grey85,Set Output On,
+setOutputOffBut,20,1,700,520,grey85,Set Output OFF,
+tabNumBut,20,1,920,360,grey85,Create Tab Number,
+jumpTabBut,20,1,920,400,grey85,Jump to Tab,
+IfOnjumpTabBut,20,1,920,480,grey85,If On Jump,
+IfOffjumpTabBut,20,1,920,520,grey85,If Off Jump,
+servoBut,20,1,920,560,grey85,Servo,
+callBut,20,1,540,560,grey85,Call Program,
+returnBut,20,1,540,600,grey85,Return,
+comPortBut,20,0,103,7,grey85,Set Com,
+ProgBut,12,0,202,42,grey85,Load Program,
+deleteBut,20,1,540,520,grey85,Delete,
+fwdBut,4,3,100,80,grey85,FWD,
+revBut,4,3,150,80,grey85,REV,
+RegNumBut,20,1,920,560,grey85,Register,
+RegJmpBut,20,1,920,600,grey85,If Register Jump,
+CalibrateBut,20,1,700,600,grey85,Auto Calibrate CMD,

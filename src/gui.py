@@ -149,60 +149,17 @@ class GuiAR2():
 
     Buttons = {}
     
-    foo = lambda: prog.manAddItem()
-    Buttons['manEnt'] = Button(tab1, bg="grey85", text="Enter Text", height=1, width=14, command=prog.manAddItem)
-    Buttons['manEnt'].place(x=795, y=641)
+    fileID = open('../conf/conf_tab1_buttons.csv')
+    csvID  = csv.reader(fileID, delimiter=',')
     
-    Buttons['teachInsBut'] = Button(tab1, bg="grey85", text="Teach New Position", height=1, width=20, command = prog.teachInsertBelSelected)
-    Buttons['teachInsBut'].place(x=540, y=440)
-
-    Buttons['teachReplaceBut'] = Button(tab1, bg="grey85", text="Modify Position", height=1, width=20, command = prog.teachReplaceSelected)
-    Buttons['teachReplaceBut'].place(x=540, y=480)
-
-    Buttons['waitTimeBut'] = Button(tab1, bg="grey85", text="Wait Time (seconds)", height=1, width=20, command = prog.waitTime)
-    Buttons['waitTimeBut'].place(x=700, y=360)
-
-    Buttons['waitInputOnBut'] = Button(tab1, bg="grey85", text="Wait Input ON", height=1, width=20, command = prog.waitInputOn)
-    Buttons['waitInputOnBut'].place(x=700, y=400)
-
-    Buttons['waitInputOffBut'] = Button(tab1, bg="grey85", text="Wait Input OFF", height=1, width=20, command = prog.waitInputOff)
-    Buttons['waitInputOffBut'].place(x=700, y=440)
-
-    Buttons['setOutputOnBut'] = Button(tab1, bg="grey85", text="Set Output On", height=1, width=20, command = prog.setOutputOn)
-    Buttons['setOutputOnBut'].place(x=700, y=480)
-
-    Buttons['setOutputOffBut'] = Button(tab1, bg="grey85", text="Set Output OFF", height=1, width=20, command = prog.setOutputOff)
-    Buttons['setOutputOffBut'].place(x=700, y=520)
-
-    Buttons['tabNumBut'] = Button(tab1, bg="grey85", text="Create Tab Number", height=1, width=20, command = prog.tabNumber)
-    Buttons['tabNumBut'].place(x=920, y=360)
-
-    # jumpTabBut = Button(tab1, bg="grey85", text="Jump to Tab", height=1, width=20, command = jumpTab)
-    # jumpTabBut.place(x=920, y=400)
-
-    # IfOnjumpTabBut = Button(tab1, bg="grey85", text="If On Jump", height=1, width=20, command = IfOnjumpTab)
-    # IfOnjumpTabBut.place(x=920, y=440)
-
-    # IfOffjumpTabBut = Button(tab1, bg="grey85", text="If Off Jump", height=1, width=20, command = IfOffjumpTab)
-    # IfOffjumpTabBut.place(x=920, y=480)
-
-    # servoBut = Button(tab1, bg="grey85", text="Servo", height=1, width=20, command = Servo)
-    # servoBut.place(x=920, y=520)
-
-    # callBut = Button(tab1, bg="grey85", text="Call Program", height=1, width=20, command = insertCallProg)
-    # callBut.place(x=540, y=560)
-    pos = 1
-    Buttons['returnBut'] = Button(tab1, bg="grey85", text="Return", height=1, width=20, command=lambda pos=pos: prog.insertReturn(pos))
-    Buttons['returnBut'].place(x=540, y=600)
-
-    # comPortBut = Button(tab1, bg="grey85", text="Set Com", height=0, width=7, command = setCom)
-    # comPortBut.place(x=103, y=7)
-
-    # ProgBut = Button(tab1, bg="grey85", text="Load Program", height=0, width=12, command = loadProg)
-    # ProgBut.place(x=202, y=42)
-
-    # deleteBut = Button(tab1, bg="grey85", text="Delete", height=1, width=20, command = deleteitem)
-    # deleteBut.place(x=540, y=520)
+    for row in csvID:
+      print(row)
+      Buttons[row[0]] = Button(tab1, width=row[1], height=row[2], bg=row[5], text=row[6])
+      Buttons[row[0]].place(x=row[3], y=row[4])
+    
+      if row[7] != '':
+        Buttons[row[0]]['command'] = getattr(prog, row[7])
+ 
 
     # runProgBut = Button(tab1, height=60, width=60, command = runProg)
     # playPhoto=PhotoImage(file="icons\play-icon.gif")
@@ -214,21 +171,8 @@ class GuiAR2():
     # stopProgBut.config(image=stopPhoto,width="60",height="60")
     # stopProgBut.place(x=200, y=80)
 
-    # fwdBut = Button(tab1, bg="grey85", text="FWD", height=3, width=4, command = stepFwd)
-    # fwdBut.place(x=100, y=80)
-
-    # revBut = Button(tab1, bg="grey85", text="REV", height=3, width=4, command = stepRev)
-    # revBut.place(x=150, y=80)
-
-    # RegNumBut = Button(tab1, bg="grey85", text="Register", height=1, width=20, command = insertRegister)
-    # RegNumBut.place(x=920, y=560)
-
-    # RegJmpBut = Button(tab1, bg="grey85", text="If Register Jump", height=1, width=20, command = IfRegjumpTab)
-    # RegJmpBut.place(x=920, y=600)
-
-    # CalibrateBut = Button(tab1, bg="grey85", text="Auto Calibrate CMD", height=1, width=20, command = insCalibrate)
-    # CalibrateBut.place(x=700, y=600)
-
+    
+    ####
     # J1jogNegBut = Button(tab1, bg="grey85", text="-", height=1, width=3, command = J1jogNeg)
     # J1jogNegBut.place(x=642, y=90)
 
@@ -300,6 +244,8 @@ class GuiAR2():
 
     # RzjogPosBut = Button(tab1, bg="grey85",text="+", height=1, width=3, command = RzjogPos)
     # RzjogPosBut.place(x=1130, y=210)
+
+    ###
 
     # JogStepsCbut = Checkbutton(tab1, text="Jog joints in steps",variable = JogStepsStat)
     # JogStepsCbut.place(x=1190, y=10)
