@@ -1,4 +1,9 @@
-"""
+""" 
+  Here the main body of the graphical user interface (GUI) is build and 
+  configured. 
+  
+  Three tabs are defined, each in there own function. The init function 
+  defines the different notebooks and tabs needed for the GUI. 
 """
 
 try:
@@ -18,19 +23,20 @@ class GuiAR2():
   """
   
   def __init__(self):
+    """ """
     self.root = Tk()
     self.root.wm_title("AR2 software 1.1")
     self.root.iconbitmap(r'icons/AR2.ico')
-    self.root.resizable(width=False, height=False)
+    self.root.resizable(width=True, height=True)
     
-    screen_width = self.root.winfo_screenwidth()
-    screen_height = self.root.winfo_screenheight()
+    self._screen_width = self.root.winfo_screenwidth() - 15
+    self._screen_height = self.root.winfo_screenheight() - 40
         
-    self.root.geometry(str(screen_width-10)+'x'+str(screen_height-40)+'+0+0')
+    self.root.geometry(str(self._screen_width)+'x'+str(self._screen_height)+'+0+0')
 
     self.root.runTrue = 0
 
-    self.nb = ttk.Notebook(self.root, width=1366, height=698)
+    self.nb = ttk.Notebook(self.root, width=self._screen_width+15, height=self._screen_height)
     self.nb.place(x=0, y=0)
 
     self.tab1 = ttk.Frame(self.nb)
