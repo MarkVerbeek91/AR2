@@ -87,12 +87,10 @@ class GuiAR2():
     
     LabelsTab1 = {}
     
-    fileID = open('../conf/conf_tab1_labels.scv')
+    fileID = open('../conf/conf_tab1_labels.csv')
     csvID  = csv.reader(fileID, delimiter=',')
     
-    for row in csvID:
-      print(row)
-      
+    for row in csvID:     
       LabelsTab1[row[0]] = Label(self.tab1, text=row[1])
       LabelsTab1[row[0]].place(x=row[2],y=row[3])
       
@@ -102,7 +100,8 @@ class GuiAR2():
       if row[5] != 'default':
         LabelsTab1[row[0]]['font'] = row[5]+row[6]
  
-
+    fileID.close()
+ 
     # Joint labels
     joint_label = {}
     for ii in range(1,7):
@@ -318,115 +317,17 @@ class GuiAR2():
 
     entryField = {}
 
-    entryField['Current Row'] = Entry(tab1, width=5)
-    entryField['Current Row'].place(x=497, y=150)
-    # curRowEntryField.place(x=497, y=150)
-
-    entryField['man'] = Entry(tab1, width=5)
-    entryField['man'].place(x=540, y=645)
+    fileID = open('../conf/conf_tab1_entries.csv')
+    csvID  = csv.reader(fileID, delimiter=',')
+  
     
-    entryField['Prog'] = Entry(tab1, width=20)
-    entryField['Prog'].place(x=70, y=45)
+    for row in csvID:
+      entryField[row[0]] = Entry(tab1, width=row[1])
+      entryField[row[0]].place(x=row[2], y=row[3])
     
-    entryField['comPort'] = Entry(tab1,width=2)
-    entryField['comPort'].place(x=80, y=10)
+    fileID.close()
 
-    entryField['speed'] = Entry(tab1,width=3)
-    entryField['speed'].place(x=540, y=360)
-    
-    # ACCdurField = Entry(tab1,width=3)
-    # ACCdurField.place(x=540, y=385)
-
-    # DECdurField = Entry(tab1,width=3)
-    # DECdurField.place(x=540, y=410)
-
-    # ACCspeedField = Entry(tab1,width=3)
-    # ACCspeedField.place(x=565, y=385)
-
-    # DECspeedField = Entry(tab1,width=3)
-    # DECspeedField.place(x=565, y=410)
-
-    # waitTimeEntryField = Entry(tab1,width=5)
-    # waitTimeEntryField.place(x=872, y=363)
-
-    # waitInputEntryField = Entry(tab1,width=5)
-    # waitInputEntryField.place(x=872, y=403)
-
-    # waitInputOffEntryField = Entry(tab1,width=5)
-    # waitInputOffEntryField.place(x=872, y=443)
-
-    # outputOnEntryField = Entry(tab1,width=5)
-    # outputOnEntryField.place(x=872, y=483)
-
-    # outputOffEntryField = Entry(tab1,width=5)
-    # outputOffEntryField.place(x=872, y=523)
-
-    # tabNumEntryField = Entry(tab1,width=5)
-    # tabNumEntryField.place(x=1092, y=363)
-
-    # jumpTabEntryField = Entry(tab1,width=5)
-    # jumpTabEntryField.place(x=1092, y=403)
-
-    # IfOnjumpInputTabEntryField = Entry(tab1,width=5)
-    # IfOnjumpInputTabEntryField.place(x=1092, y=443)
-
-    # IfOnjumpNumberTabEntryField = Entry(tab1,width=5)
-    # IfOnjumpNumberTabEntryField.place(x=1132, y=443)
-
-    # IfOffjumpInputTabEntryField = Entry(tab1,width=5)
-    # IfOffjumpInputTabEntryField.place(x=1092, y=483)
-
-    # IfOffjumpNumberTabEntryField = Entry(tab1,width=5)
-    # IfOffjumpNumberTabEntryField.place(x=1132, y=483)
-
-    # servoNumEntryField = Entry(tab1,width=5)
-    # servoNumEntryField.place(x=1092, y=523)
-
-    # servoPosEntryField = Entry(tab1,width=5)
-    # servoPosEntryField.place(x=1132, y=523)
-
-    # changeProgEntryField = Entry(tab1,width=12)
-    # changeProgEntryField.place(x=712, y=563)
-
-    # R1EntryField = Entry(tab1,width=5)
-    # R1EntryField.place(x=1194, y=54)
-
-    # R2EntryField = Entry(tab1,width=5)
-    # R2EntryField.place(x=1194, y=94)
-
-    # R3EntryField = Entry(tab1,width=5)
-    # R3EntryField.place(x=1194, y=134)
-
-    # R4EntryField = Entry(tab1,width=5)
-    # R4EntryField.place(x=1194, y=174)
-
-    # R5EntryField = Entry(tab1,width=5)
-    # R5EntryField.place(x=1269, y=54)
-
-    # R6EntryField = Entry(tab1,width=5)
-    # R6EntryField.place(x=1269, y=94)
-
-    # R7EntryField = Entry(tab1,width=5)
-    # R7EntryField.place(x=1269, y=134)
-
-    # R8EntryField = Entry(tab1,width=5)
-    # R8EntryField.place(x=1269, y=174)
-
-    # regNumEntryField = Entry(tab1,width=5)
-    # regNumEntryField.place(x=1080, y=563)
-
-    # regEqEntryField = Entry(tab1,width=5)
-    # regEqEntryField.place(x=1132, y=563)
-
-    # regNumJmpEntryField = Entry(tab1,width=5)
-    # regNumJmpEntryField.place(x=1080, y=603)
-
-    # regEqJmpEntryField = Entry(tab1,width=5)
-    # regEqJmpEntryField.place(x=1132, y=603)
-
-    # regTabJmpEntryField = Entry(tab1,width=5)
-    # regTabJmpEntryField.place(x=1184, y=603)
-
+  
     joint_names = []
     for ii in range(1,7):
       joint_names.append('J' + str(ii))
