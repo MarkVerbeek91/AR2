@@ -1,0 +1,24 @@
+curRowLab, Current Row  = , 407, 150,none,default,default
+almStatusLab,SYSTEM READY - NO ACTIVE ALARMS,175,10,grey,default,default
+runStatusLab,PROGRAM STOPPED,20,150,red,default,default
+inoutavailLab,INPUTS 22-37  /  OUTPUTS 38-53  /  SERVOS A0-A7,10,650,none,default,default
+manEntLab,Manual Program Entry,540,630,none,Arial,6
+ifOnLab,Input           Tab,1092,428,none,Arial,6
+ifOffLab,Input           Tab,1092,468,none,Arial,6
+regEqLab,Register           Num (or +),1077,547,none,Arial,6
+ifregTabJmpLab,Register             Num          Jump to Tab,1077,587,none,Arial,6
+servoLab,Number      Position,1092,508,none,Arial,6
+ComPortLab,COM PORT:,10,10,none,default,default
+ProgLab,Program:,10,45,none,default,default
+speedLab,Robot Speed (%),565,360,none,default,default
+ACCLab,ACC(dur/speed %),590,385,none,default,default
+DECLab,DEC(dur/speed %),590,410,none,default,default
+JointCurAngLab,Current Angle:,540,40,none,default,default
+JointJogDegsLab,Degree to Jog:,540,65,none,default,default
+J1jogRobotLab,JOG ROBOT,540,160,none,default,default
+XYZcurPoLab,Current Position:,540,185,none,default,default
+XYZjogMMLab,Millimeters to Jog:,540,185,none,default,default
+XYZjogRobotLab,JOG ROBOT,540,212,none,default,default
+changeProgequalsLab,=,695,560,none,default,default
+regequalsLab,=,1117,561,none,default,default
+regJmpequalsLab,=,1117,601,none,default,defaults
