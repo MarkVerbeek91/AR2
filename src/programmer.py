@@ -1,13 +1,15 @@
 """ """
 
 import pickle
+import csv
 
 class program_line():
-  def __init__(self, name, type, data, comment):
-    self.name = name
-    self.type = type
-    self.data = data
-    self.comment = comment
+  def __init__(self, ID, Desciption, protocol, data, comment):
+    self._ID         = ID
+    self._desciption = Desciption
+    self._protocol   = protocol
+    self.data        = data
+    self.comment    = comment
     
   def print_program_line(self):
     
@@ -18,11 +20,9 @@ class movement():
     self.pos = pos
     self.acc = acc
     self.vel = vel
-    self.type = type
+    self.type = 'linear' # only one supported, is implemented in arduino software
     
-    self.ang = '' # calc angles 
-    
-    # TODO: type lineair movement
+    # TODO: type linear movement
     
     # TODO: type sinus movement
     
@@ -45,7 +45,19 @@ class Programmer():
     
     self.program = []
     self.current_line = -1
-  
+    
+    # TODO: load protocol 
+    
+    fileID = open('../conf/conf_commands.csv')
+    csvID  = csv.reader(fileID, delimiter=',')
+    
+    self._commands = []
+    for row in csvID:
+      print(row)
+      new_cmd = program_line(int(row[0]), row[1], row[2], '', '')
+      self._commands.append(new_cmd)
+      
+    
   def add_command(self, new_cmd, var):
     if var == -1:
       self.program.append(new_cmd)

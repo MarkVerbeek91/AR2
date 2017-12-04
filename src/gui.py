@@ -25,8 +25,7 @@ class GuiAR2():
     
     screen_width = self.root.winfo_screenwidth()
     screen_height = self.root.winfo_screenheight()
-    
-    
+        
     self.root.geometry(str(screen_width-10)+'x'+str(screen_height-40)+'+0+0')
 
     self.root.runTrue = 0
@@ -43,7 +42,7 @@ class GuiAR2():
     self.tab3 = ttk.Frame(self.nb)
     self.nb.add(self.tab3, text=' Inputs Outputs ')
     
-    # 
+    # TODO: split Main Controls in programming and robot status 
     
     self.currentAngleEntryField = {}
     self.jogDegreesEntryField   = {}
@@ -135,40 +134,38 @@ class GuiAR2():
     ####STEPS LABELS BLUE######
     stepCol = "SteelBlue4"
 
-    StepsLab = Label(tab1, font=("Arial", 8), fg=stepCol, text = "/step")
-    StepsLab.place(x=620, y=40)
-
     joint_step_label = {}
+    joint_label2 = {}
+    joint_str = [" X", " Y", " Z", "Rx", "Ry", "Rz"]
     for ii in range(1,7):
       joint_step_label[ii] = Label(tab1, font=("Arial", 8), fg=stepCol, text = "000")
       joint_step_label[ii].place(x=695+(ii-1)*90, y=40)
   
-    
-    joint_str = [" X", " Y", " Z", "Rx", "Ry", "Rz"]
-    joint_label2 = {}
-    for ii in range(1,7):
       joint_label2[ii] = Label(tab1, font=("Arial", 18), text = joint_str[ii-1])
       joint_label2[ii].place(x=660+(ii-1)*90, y=125)
 
-      
+    
+    StepsLab = Label(tab1, font=("Arial", 8), fg=stepCol, text = "/step")
+    StepsLab.place(x=620, y=40)
 
-    J1curAngLab = Label(tab1, text = "Current Angle:")
-    J1curAngLab.place(x=540, y=40)
+    JointCurAngLab = Label(tab1, text = "Current Angle:")
+    JointCurAngLab.place(x=540, y=40)
+
+    JointJogDegsLab = Label(tab1, text = "Degrees to Jog:")
+    JointJogDegsLab.place(x=540, y=65)
+    
+    J1jogRobotLab = Label(tab1, text = "JOG ROBOT")
+    J1jogRobotLab.place(x=540, y=92)
 
     XYZcurPoLab = Label(tab1, text = "Current Position:")
     XYZcurPoLab.place(x=540, y=160)
 
-    J1jogDegsLab = Label(tab1, text = "Degrees to Jog:")
-    J1jogDegsLab.place(x=540, y=65)
-
     XYZjogMMLab = Label(tab1, text = "Millimeters to Jog:")
     XYZjogMMLab.place(x=540, y=185)
 
-    J1jogRobotLab = Label(tab1, text = "JOG ROBOT")
-    J1jogRobotLab.place(x=540, y=92)
-
     XYZjogRobotLab = Label(tab1, text = "JOG ROBOT")
     XYZjogRobotLab.place(x=540, y=212)
+
 
     for ii in range(360, 521, 40):
       tmp = Label(tab1, text = "=")

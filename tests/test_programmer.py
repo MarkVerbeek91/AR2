@@ -12,10 +12,11 @@ from programmer import program_line
 class program_linteTestCAse(unittest.TestCase):
   
   def test_program_line_init(self):
-    prog_line = program_line('name', 'type', 'data', 'comment')
+    prog_line = program_line(1, 'name', 'type', 'data', 'comment')
     
-    self.assertEqual(prog_line.name, 'name')
-    self.assertEqual(prog_line.type, 'type')
+    self.assertEqual(prog_line._ID, 1)
+    self.assertEqual(prog_line._desciption, 'name')
+    self.assertEqual(prog_line._protocol, 'type')
     self.assertEqual(prog_line.data, 'data')
     self.assertEqual(prog_line.comment, 'comment')
   
@@ -50,11 +51,12 @@ class programmerTestCase(unittest.TestCase):
     
   def test_add_command(self):
     """ """
-    new_cmd = program_line('foo', 1, 'bar', 'baz')
+    new_cmd = program_line(1, 'foo', 1, 'bar', 'baz')
     self.programmer.add_command(new_cmd, -1)
     
-    self.assertEqual(self.programmer.program[0].name, 'foo')
-    self.assertEqual(self.programmer.program[0].type, 1)
+    self.assertEqual(self.programmer.program[0]._ID, 1)
+    self.assertEqual(self.programmer.program[0]._desciption, 'foo')
+    self.assertEqual(self.programmer.program[0]._protocol, 1 )
     self.assertEqual(self.programmer.program[0].data, 'bar')
     self.assertEqual(self.programmer.program[0].comment, 'baz')
   
@@ -62,7 +64,7 @@ class programmerTestCase(unittest.TestCase):
     """ """
     
     for ii in range(1,5):
-      new_cmd = program_line('foo', 1, ii, 'baz')
+      new_cmd = program_line(1, 'foo', 1, ii, 'baz')
       self.programmer.add_command(new_cmd, -1)
  
     self.assertEqual(self.programmer.numberOfCommands(),4)
@@ -80,7 +82,7 @@ class programmerTestCase(unittest.TestCase):
     self.assertEqual(self.programmer.remove_command(-1), -1)
         
     for ii in range(1,5):
-      new_cmd = program_line('foo', 1, ii, 'baz')
+      new_cmd = program_line(1, 'foo', 1, ii, 'baz')
       self.programmer.add_command(new_cmd, -1)    
     
     self.programmer.remove_command(-1)

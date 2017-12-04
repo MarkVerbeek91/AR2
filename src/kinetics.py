@@ -3,7 +3,14 @@
 class kinetics():
 
   def __init__():
-    self.
+    self.B = []
+    self.C = []
+    self.D = []
+    self.E = []
+    self.F = []
+    self.F = []
+    self.F = []
+
 
   def ForwardKinetics(self, joints)
     for joint in joints:
@@ -11,8 +18,9 @@ class kinetics():
         joint.CureentAngle == 0.001
 
     ## CONVERT TO RADIANS
-    C4 = math.radians(float(J1AngCur)+DHt1)
-    C5 = math.radians(float(J2AngCur)+DHt2)
+    
+      self.C[4,13] = math.radians(float(joint.CureentAngle)+DHt1)
+      self.C[5,14] = math.radians(float(J2AngCur)+DHt2)
     C6 = math.radians(float(J3AngCur)+DHt3)
     C7 = math.radians(float(J4AngCur)+DHt4)
     C8 = math.radians(float(J5AngCur)+DHt5)
