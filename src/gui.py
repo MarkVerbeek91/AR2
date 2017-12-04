@@ -84,51 +84,53 @@ class GuiAR2():
     tab1.progView.pack()
     scrollbar.config(command=tab1.progView.yview)
     
-    curRowLab = Label(self.tab1, text = "Current Row  = ")
-    curRowLab.place(x=407, y=150)
+    LabelsTab1 = {}
+    
+    LabelsTab1['curRowLab'] = Label(self.tab1, text = "Current Row  = ")
+    LabelsTab1['curRowLab'].place(x=407, y=150)
 
-    almStatusLab = Label(self.tab1, text = "SYSTEM READY - NO ACTIVE ALARMS", bg = "grey")
-    almStatusLab.place(x=175, y=10)
+    LabelsTab1['almStatusLab'] = Label(self.tab1, text = "SYSTEM READY - NO ACTIVE ALARMS", bg = "grey")
+    LabelsTab1['almStatusLab'].place(x=175, y=10)
 
 
-    runStatusLab = Label(self.tab1, text = "PROGRAM STOPPED", bg = "red")
-    runStatusLab.place(x=20, y=150)
+    LabelsTab1['runStatusLab'] = Label(self.tab1, text = "PROGRAM STOPPED", bg = "red")
+    LabelsTab1['runStatusLab'].place(x=20, y=150)
 
-    inoutavailLab = Label(self.tab1, text = "INPUTS 22-37  /  OUTPUTS 38-53  /  SERVOS A0-A7")
-    inoutavailLab.place(x=10, y=650)
+    LabelsTab1['inoutavailLab'] = Label(self.tab1, text = "INPUTS 22-37  /  OUTPUTS 38-53  /  SERVOS A0-A7")
+    LabelsTab1['inoutavailLab'].place(x=10, y=650)
 
-    manEntLab = Label(tab1, font=("Arial", 6), text = "Manual Program Entry")
-    manEntLab.place(x=540, y=630)
+    LabelsTab1['manEntLab'] = Label(tab1, font=("Arial", 6), text = "Manual Program Entry")
+    LabelsTab1['manEntLab'].place(x=540, y=630)
 
-    ifOnLab = Label(tab1,font=("Arial", 6), text = "Input           Tab")
-    ifOnLab.place(x=1092, y=428)
+    LabelsTab1['ifOnLab'] = Label(tab1,font=("Arial", 6), text = "Input           Tab")
+    LabelsTab1['ifOnLab'].place(x=1092, y=428)
 
-    ifOffLab = Label(tab1,font=("Arial", 6), text = "Input           Tab")
-    ifOffLab.place(x=1092, y=468)
+    LabelsTab1['ifOffLab'] = Label(tab1,font=("Arial", 6), text = "Input           Tab")
+    LabelsTab1['ifOffLab'].place(x=1092, y=468)
 
-    regEqLab = Label(tab1,font=("Arial", 6), text = "Register           Num (or +)")
-    regEqLab.place(x=1077, y=547)
+    LabelsTab1['regEqLab'] = Label(tab1,font=("Arial", 6), text = "Register           Num (or +)")
+    LabelsTab1['regEqLab'].place(x=1077, y=547)
 
-    ifregTabJmpLab = Label(tab1,font=("Arial", 6), text = "Register             Num          Jump to Tab")
-    ifregTabJmpLab.place(x=1077, y=587)
+    LabelsTab1['ifregTabJmpLab'] = Label(tab1,font=("Arial", 6), text = "Register             Num          Jump to Tab")
+    LabelsTab1['ifregTabJmpLab'].place(x=1077, y=587)
 
-    servoLab = Label(tab1,font=("Arial", 6), text = "Number      Position")
-    servoLab.place(x=1092, y=508)
+    LabelsTab1['servoLab'] = Label(tab1,font=("Arial", 6), text = "Number      Position")
+    LabelsTab1['servoLab'].place(x=1092, y=508)
 
-    ComPortLab = Label(tab1, text = "COM PORT:")
-    ComPortLab.place(x=10, y=10)
+    LabelsTab1['ComPortLab'] = Label(tab1, text = "COM PORT:")
+    LabelsTab1['ComPortLab'].place(x=10, y=10)
 
-    ProgLab = Label(tab1, text = "Program:")
-    ProgLab.place(x=10, y=45)
+    LabelsTab1['ProgLab'] = Label(tab1, text = "Program:")
+    LabelsTab1['ProgLab'].place(x=10, y=45)
 
-    speedLab = Label(tab1, text = "Robot Speed (%)")
-    speedLab.place(x=565, y=360)
+    LabelsTab1['speedLab'] = Label(tab1, text = "Robot Speed (%)")
+    LabelsTab1['speedLab'].place(x=565, y=360)
 
-    ACCLab = Label(tab1, text = "ACC(dur/speed %)")
-    ACCLab.place(x=590, y=385)
+    LabelsTab1['ACCLab'] = Label(tab1, text = "ACC(dur/speed %)")
+    LabelsTab1['ACCLab'].place(x=590, y=385)
 
-    DECLab = Label(tab1, text = "DEC(dur/speed %)")
-    DECLab.place(x=590, y=410)
+    LabelsTab1['DECLab'] = Label(tab1, text = "DEC(dur/speed %)")
+    LabelsTab1['DECLab'].place(x=590, y=410)
 
     # Joint labels
     joint_label = {}
@@ -151,26 +153,26 @@ class GuiAR2():
       joint_label2[ii].place(x=660+(ii-1)*90, y=125)
 
     
-    StepsLab = Label(tab1, font=("Arial", 8), fg=stepCol, text = "/step")
-    StepsLab.place(x=620, y=40)
+    LabelsTab1['StepsLab'] = Label(tab1, font=("Arial", 8), fg=stepCol, text = "/step")
+    LabelsTab1['StepsLab'].place(x=620, y=40)
 
-    JointCurAngLab = Label(tab1, text = "Current Angle:")
-    JointCurAngLab.place(x=540, y=40)
+    LabelsTab1['JointCurAngLab'] = Label(tab1, text = "Current Angle:")
+    LabelsTab1['JointCurAngLab'].place(x=540, y=40)
 
-    JointJogDegsLab = Label(tab1, text = "Degrees to Jog:")
-    JointJogDegsLab.place(x=540, y=65)
+    LabelsTab1['JointJogDegsLab'] = Label(tab1, text = "Degrees to Jog:")
+    LabelsTab1['JointJogDegsLab'].place(x=540, y=65)
     
-    J1jogRobotLab = Label(tab1, text = "JOG ROBOT")
-    J1jogRobotLab.place(x=540, y=92)
+    LabelsTab1['J1jogRobotLab'] = Label(tab1, text = "JOG ROBOT")
+    LabelsTab1['J1jogRobotLab'].place(x=540, y=92)
 
-    XYZcurPoLab = Label(tab1, text = "Current Position:")
-    XYZcurPoLab.place(x=540, y=160)
+    LabelsTab1['XYZcurPoLab'] = Label(tab1, text = "Current Position:")
+    LabelsTab1['XYZcurPoLab'].place(x=540, y=160)
 
-    XYZjogMMLab = Label(tab1, text = "Millimeters to Jog:")
-    XYZjogMMLab.place(x=540, y=185)
+    LabelsTab1['XYZjogMMLab'] = Label(tab1, text = "Millimeters to Jog:")
+    LabelsTab1['XYZjogMMLab'].place(x=540, y=185)
 
-    XYZjogRobotLab = Label(tab1, text = "JOG ROBOT")
-    XYZjogRobotLab.place(x=540, y=212)
+    LabelsTab1['XYZjogRobotLab'] = Label(tab1, text = "JOG ROBOT")
+    LabelsTab1['XYZjogRobotLab'].place(x=540, y=212)
 
 
     for ii in range(360, 521, 40):
@@ -181,14 +183,14 @@ class GuiAR2():
       tmp.place(x=1075, y=360)
 
     
-    changeProgequalsLab = Label(tab1, text = "=")
-    changeProgequalsLab.place(x=695, y=560)
+    LabelsTab1['changeProgequalsLab'] = Label(tab1, text = "=")
+    LabelsTab1['changeProgequalsLab'].place(x=695, y=560)
 
-    regequalsLab = Label(tab1, text = "=")
-    regequalsLab.place(x=1117, y=561)
+    LabelsTab1['regequalsLab'] = Label(tab1, text = "=")
+    LabelsTab1['regequalsLab'].place(x=1117, y=561)
 
-    regJmpequalsLab = Label(tab1, text = "=")
-    regJmpequalsLab.place(x=1117, y=601)
+    LabelsTab1['regJmpequalsLab'] = Label(tab1, text = "=")
+    LabelsTab1['regJmpequalsLab'].place(x=1117, y=601)
 
     label_robot = {}
     
