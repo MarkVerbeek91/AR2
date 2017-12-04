@@ -1,0 +1,87 @@
+@startuml
+Controller --> Joint
+Programmer --> Controller
+Programmer --> Program
+Gui --> Programmer
+Controller --> Serial_communications
+
+class Gui {
+  Object noteBook
+  Object Tab1
+  Object Tab2
+  Object Tab3
+  
+  __init__()
+  createTab1()
+  createTab2()
+  createTab3()
+}
+
+class Joint {
+   int CurrentAngle
+   int CurrentStep
+   float AngleLimitPositive
+   float AngleLimitNegative
+   float DegreePerSTep
+   
+   __init__()
+   step_positive()
+   step_negative()
+}
+
+class Programmer {
+  Program program
+  int numberOfLines
+  int CurrentLine
+  
+  
+  __init__()
+  addCommand()
+  removeCommand()
+  runProgramm()
+  stopProgramm()
+  calibrateRobot()
+  savePositionData()
+  execureRow()
+  stepForward()
+  stepBackwars()
+  teachInsertBelSelected()
+  teachReplaceSelected()
+  teachFineCal()
+  manAddItem()
+
+}
+
+class Program {
+  int NumberOfCommands
+  int CurrentCommand
+  List commands
+  
+
+}
+
+class Controller {
+  Joint Joints
+  
+  __init__()
+  forwardKinetics()
+  backwardKinetics()
+  jogJointAngle()
+  jogPosition()
+  ServoOn()
+  ServoOff()
+  DO
+}
+
+class Serial_communications {
+  serial Serial
+  int port_number
+  string port_name
+  int BautRate
+  
+  __init__()
+  openCom()
+  closeCom()
+  
+}
+@enduml

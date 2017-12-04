@@ -15,5 +15,6 @@ def test_platform_type():
   assert_test(platform)
   
   
-  
+if __name__ == '__main__':
+    unittest.main()
   

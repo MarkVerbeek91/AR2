@@ -40,3 +40,14 @@ Explanation of the file stucture:
 - stl: contrains the latest export of the CAD files to the STL format for printing. 
 - tests: contains the unittest files and other tests. 
 
+## TASKs (by Mark)
+
+A (very) short overview of tasks that needed to be done:
+
+- implement functionality in all modules.
+- add tests for all about implemented functionality.
+- restructure c-file for arduino. 
+- update documentation on running, building, etc of all software
+- add documentation to scr files (python and c)
+- make a better TO DO list
+
