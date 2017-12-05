@@ -1,4 +1,9 @@
-""" """
+"""
+  Custom serial class
+  
+  To test some (minor) controller features without the availebility of 
+  real ardiuno a serial connection simulator is needed
+"""
 
 
 class Serial():

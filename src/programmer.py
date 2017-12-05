@@ -1,4 +1,11 @@
-""" """
+"""
+  Programmer class
+  
+  This class keeps a list of program line (aka commands) that are programmed. 
+  And feeds it to the controller when the program is executed. 
+"""
+
+import controller
 
 import pickle
 import csv
@@ -9,7 +16,7 @@ class program_line():
     self._desciption = Desciption
     self._protocol   = protocol
     self.data        = data
-    self.comment    = comment
+    self.comment     = comment
     
   def print_program_line(self):
     
@@ -32,10 +39,10 @@ class Programmer():
   def __init__(self, progName):
   
     try:
-      print("Trying to open %s" % progName)
+      # print("Trying to open %s" % progName)
       self.Prog = pickle.load(open(progName,"rb"))
     except:
-      print("Program does not exist, creating new one")
+      # print("Program does not exist, creating new one")
       self.Prog = ['##BEGINNING OF PROGRAM##','Tab Number 1']
       
       try: 
@@ -53,10 +60,12 @@ class Programmer():
     
     self._commands = []
     for row in csvID:
-      print(row)
+      # print(row)
       new_cmd = program_line(int(row[0]), row[1], row[2], '', '')
       self._commands.append(new_cmd)
-      
+    
+    self.number_of_joints = 6
+    self.controller = controller.Controller(self.number_of_joints)
     
   def add_command(self, new_cmd, var):
     if var == -1:
@@ -82,6 +91,12 @@ class Programmer():
   def manAddItem(self):
     print("hello")
   
+  def run_program(self):
+    pass
+  
+  def run_program_line(self, var):
+    self.controller.executeRow(self.program[var-1])
+  
   def insertReturn(self, pos):
     new_cmd = program_line('return', 1, 'none', '')
     self.add_command(new_cmd, pos)
@@ -92,6 +107,9 @@ class Programmer():
     
   def teachInsertBelSelected(self):
     print("gallo")
+    
+    self.add_command(self._commands[0], -1)
+    
  
   def teachReplaceSelected(self):
     pass

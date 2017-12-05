@@ -1,5 +1,9 @@
-""" Class file for serial communication 
+""" 
+  Serial communication Class
 
+  To keep the serial communication separate from the controller a serial 
+  coms class is created that takes care of most communication with any 
+  serial port.
 """
 try:
   import serial
@@ -21,6 +25,7 @@ class Serial_communication():
   def close(self):
     if self.is_active:
       self.serial_com.close()
+      self.is_active   = False
     else:
       print('port was not open')
       
@@ -30,6 +35,7 @@ class Serial_communication():
     port = "COM" + str(self.port_number)
     baud = 9600 
     self.serial_com = serial.Serial(port, baud)
+    self.is_active  = True
 
   def send_command(self, command):
     if command[-1:] == '\n':

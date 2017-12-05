@@ -1,4 +1,10 @@
-
+"""
+  The kinetics class
+  
+  Contains the forward and backward kinetics of the robotic arm. 
+  
+  So far not jet usable and also no configurable
+"""
 
 class kinetics():
 

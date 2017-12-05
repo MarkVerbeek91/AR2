@@ -1,17 +1,18 @@
 """ 
+  Main script of the AR2 control software
+  
+  A Gui is initiated and started. 
+  
+  Probably the controller and programmer should be started here to...
 """
+
+import sys
+import time
 
 import gui
 import joint
-
 import controller
 import programmer
-
-import sys
-
-import time
-
-import pdb
 
 if sys.platform == 'win32':
   PLATFORM = 'pc'
@@ -36,6 +37,7 @@ def main():
   
   GUI.start()
   
+  print('program exited')
 
 if __name__ == "__main__":
   main()

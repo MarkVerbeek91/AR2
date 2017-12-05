@@ -59,10 +59,11 @@ class GuiAR2():
     
 
   def start(self):
+    """ Start Main loop to get to program responsive """
     self.tab1.mainloop()
     
   def CreateTab1(self):
-  
+    """ Main status and control tap is created here """
     tab1 = self.tab1
   
     progName = "somefile"

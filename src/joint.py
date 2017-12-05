@@ -1,4 +1,9 @@
-""" """
+""" 
+  Joint Class
+  
+  This class stores all data for a joint and (perhaps) does some checks 
+  of movements/actions are allowed.
+"""
 
 class Joint():
 

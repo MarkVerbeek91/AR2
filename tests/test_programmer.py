@@ -94,6 +94,13 @@ class programmerTestCase(unittest.TestCase):
     # self.assertEqual(self.programmer.program[0].data, 3)
     # self.assertEqual(self.programmer.program[0].comment, 'baz')
     
+  def test_add_and_run_command(self):
+    """ """
+       
+    self.programmer.teachInsertBelSelected()
+
+    self.programmer.run_program_line(1)
+    
     
     
 if __name__ == '__main__':
