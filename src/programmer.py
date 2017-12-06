@@ -7,6 +7,7 @@
 
 import controller
 
+# import threading
 import pickle
 import csv
 
@@ -94,6 +95,7 @@ class Programmer():
   def run_program(self):
     print('starting program')
   
+    # TODO: start program in threat
     self.controller.executeProgram(self.program)
     
     
@@ -118,8 +120,10 @@ class Programmer():
     
   def teachInsertBelSelected(self):
     print("gallo")
+    new_cmd = self._commands[0]
+    new_cmd.data = 'some very numbery string'
     
-    self.add_command(self._commands[0], -1)
+    self.add_command(new_cmd, -1)
     
  
   def teachReplaceSelected(self):
@@ -128,7 +132,9 @@ class Programmer():
   
     
   def waitInputOn(self):
-    pass
+    new_cmd = self._commands[2]
+    new_cmd.data = 'some number'
+    self.add_command(new_cmd, -1)
     
   def waitInputOff(self):
     pass

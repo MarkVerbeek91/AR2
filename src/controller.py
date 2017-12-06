@@ -40,6 +40,7 @@ class Controller():
     self.running = True
     
     if program_line._ID == 1:
+      """ executing a movement """
       print('executing something')
       
       if self.serCom.is_active:
@@ -48,9 +49,40 @@ class Controller():
       else:
         print("Serial Port not open")
     elif program_line._ID == 2:
-      
+      """ waiting """
       time.sleep(program_line.data)
-      
+    elif program_line._ID == 3:
+      """ waiting on input ON """
+      wait_time = 1 # seconds
+      while not self.stop and wait_time > 0:
+        response = self.serCom.send_command("input status")
+        time.sleep(0.1)
+        wait_time -= 0.1
+      pass
+    elif program_line._ID == 4:
+      """ waiting on input OFF """
+      pass
+    elif program_line._ID == 5:
+      """ setting output ON """
+      pass
+    elif program_line._ID == 6:
+      """ setting output OFF """
+      pass
+    elif program_line._ID == 7:
+      """ Conditional input ON """
+      pass
+    elif program_line._ID == 8:
+      """ Conditional input OFF """
+      pass
+    elif program_line._ID == 9:
+      """ Conditional register EQUAL """
+      pass
+    elif program_line._ID == 10:
+      """ Conditional register SMALLER """
+      pass
+    elif program_line._ID == 11:
+      """ Conditional register BIGGER """
+      pass
     else:
       print('not doing anything')
     
@@ -60,14 +92,14 @@ class Controller():
     """ Executing program """
     
     if self.running:
-      print('controller budy')
+      print('controller busy')
       return
-  
-    self.running = True
   
     for prog_line in program:
       if not self.stop:
         print(prog_line)
+        self.executeRow(prog_line)
+        time.sleep(1)
       else:
         print('program needed stopping')
   
@@ -88,4 +120,14 @@ class Controller():
       self.calibrated = True
     else:
       print(response)
+      
+  def return_joint_status(self):
+    std = ''
+    
+    for joint in self.joints:
+      std += str(joint.CurrentStep)
+    
+    print(std)
+    return std
+      
     # reset value in gui. 

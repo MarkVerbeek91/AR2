@@ -15,6 +15,7 @@ class Joint():
     self._DegreePerStep     = DPS
     self.CurrentStep        = CS
     self._CurrentAngle      = CA
+    self.short_name         = 'empty'
     
   def jog_step(self, stepSize):
     if self.CurrentStep + stepSize < self.StepLimit and \

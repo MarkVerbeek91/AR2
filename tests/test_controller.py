@@ -12,7 +12,7 @@ class controllerTestcase(unittest.TestCase):
   
   def setUp(self):
     """ """
-    self.controller = controller.Controller()
+    self.controller = controller.Controller(6)
     
   def test_controllerInit(self):
     """ """
@@ -27,6 +27,9 @@ class controllerTestcase(unittest.TestCase):
     self.assertTrue(self.controller.calibrated)
     
 
+  def test_return_joint_status(self):
+    self.controller.return_joint_status()
+    
   # def suite():
     # suite = unittest.TestSuite()
     # suite.addTest(controllerTestcase('test_controllerInit'))
