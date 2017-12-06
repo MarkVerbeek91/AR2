@@ -92,7 +92,12 @@ class Programmer():
     print("hello")
   
   def run_program(self):
-    pass
+    print('starting program')
+  
+    
+  def stop_program(self):
+    print('stopping program')
+  
   
   def run_program_line(self, var):
     self.controller.executeRow(self.program[var-1])

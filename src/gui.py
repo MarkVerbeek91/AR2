@@ -154,7 +154,6 @@ class GuiAR2():
     csvID  = csv.reader(fileID, delimiter=',')
     
     for row in csvID:
-      print(row)
       Buttons[row[0]] = Button(tab1, width=row[1], height=row[2], bg=row[5], text=row[6])
       Buttons[row[0]].place(x=row[3], y=row[4])
     
@@ -162,15 +161,15 @@ class GuiAR2():
         Buttons[row[0]]['command'] = getattr(prog, row[7])
  
 
-    # runProgBut = Button(tab1, height=60, width=60, command = runProg)
-    # playPhoto=PhotoImage(file="icons\play-icon.gif")
-    # runProgBut.config(image=playPhoto,width="60",height="60")
-    # runProgBut.place(x=20, y=80)
+    Buttons['runProgBut'] = Button(tab1, height=1, width=10, text='run', command = prog.run_program)
+    # playPhoto=PhotoImage(file="icons/play-icon.gif")
+    # Buttons['runProgBut'].config(image=playPhoto,width="60",height="60")
+    Buttons['runProgBut'].place(x=20, y=80)
 
-    # stopProgBut = Button(tab1, height=60, width=60, command = stopProg)
-    # stopPhoto=PhotoImage(file="icons\stop-icon.gif")
-    # stopProgBut.config(image=stopPhoto,width="60",height="60")
-    # stopProgBut.place(x=200, y=80)
+    Buttons['stopProgBut'] = Button(tab1, height=1, width=10, text='stop', command = prog.stop_program)
+    # stopPhoto=PhotoImage(file="icons/stop-icon.gif")
+    # Buttons['stopProgBut'].config(image=stopPhoto,width="60",height="60")
+    Buttons['stopProgBut'].place(x=200, y=80)
 
     
     ####
