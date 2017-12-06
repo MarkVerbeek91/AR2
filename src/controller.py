@@ -26,10 +26,18 @@ class Controller():
     self.serCom     = sc.Serial_communication(5)
     self.serCom.open(self.serCom)
     self.calibrated = False
+    self.running    = False
+    self.stop       = False
     
   def executeRow(self, program_line):
     """ Execute program line """
     print(program_line._ID)
+    
+    if self.running:
+      print('controller buzy')
+      return 
+    
+    self.running = True
     
     if program_line._ID == 1:
       print('executing something')
@@ -46,8 +54,25 @@ class Controller():
     else:
       print('not doing anything')
     
+    self.running = False
+  
+  def executeProgram(self, program):
+    """ Executing program """
     
-    
+    if self.running:
+      print('controller budy')
+      return
+  
+    self.running = True
+  
+    for prog_line in program:
+      if not self.stop:
+        print(prog_line)
+      else:
+        print('program needed stopping')
+  
+    self.running = False
+  
   def calibrateRobot(self):
     """ Do a full robot calibration """
     command = "LL"

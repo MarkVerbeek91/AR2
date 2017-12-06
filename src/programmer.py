@@ -94,10 +94,16 @@ class Programmer():
   def run_program(self):
     print('starting program')
   
+    self.controller.executeProgram(self.program)
+    
+    
     
   def stop_program(self):
-    print('stopping program')
-  
+    if self.controller.running:
+      print('stopping program')      
+      self.controller.stop = True
+    else:
+      print('no programming running')
   
   def run_program_line(self, var):
     self.controller.executeRow(self.program[var-1])
