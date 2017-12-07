@@ -57,16 +57,24 @@ class GuiAR2():
     self.currentPositionEntryField = {}
     self.jogPositionEntryField     = {}
     
+    self.progName = "default"
+    self.programmer = programmer.Programmer(self.progName)
 
   def start(self):
     """ Start Main loop to get to program responsive """
     self.tab1.mainloop()
-    
+  
+  def updateProgramView(self, var):
+    self.tab1.progView.delete(0, END)
+    for item in self.programmer.program:
+      self.tab1.progView.insert(END,item._desciption) 
+    self.tab1.progView.pack()
+  
   def CreateTab1(self):
     """ Main status and control tap is created here """
     tab1 = self.tab1
   
-    progName = "somefile"
+
     ProgEntryField = Entry(tab1,width=20)
     ProgEntryField.place(x=170, y=45)
     
@@ -75,17 +83,16 @@ class GuiAR2():
     scrollbar = Scrollbar(progframe) 
     scrollbar.pack(side=RIGHT, fill=Y)
     tab1.progView = Listbox(progframe ,width=64,height=29, yscrollcommand=scrollbar.set)
-       
-    prog = programmer.Programmer(progName)
     
-    tab1.progView.bind('<<ListboxSelect>>', prog.progViewselect)
+    tab1.progView.bind('<<ListboxSelect>>', self.updateProgramView)
     
     time.sleep(.2)
-    for item in prog.Prog:
-      tab1.progView.insert(END,item) 
-    tab1.progView.pack()
+    
+    self.updateProgramView(tab1.progView)
+    
     scrollbar.config(command=tab1.progView.yview)
     
+    # Create Labels
     LabelsTab1 = {}
     
     fileID = open('../conf/conf_tab1_labels.csv')
@@ -158,15 +165,15 @@ class GuiAR2():
       Buttons[row[0]].place(x=row[3], y=row[4])
     
       if row[7] != '':
-        Buttons[row[0]]['command'] = getattr(prog, row[7])
+        Buttons[row[0]]['command'] = getattr(self.programmer, row[7])
  
 
-    Buttons['runProgBut'] = Button(tab1, height=1, width=10, text='run', command = prog.run_program)
+    Buttons['runProgBut'] = Button(tab1, height=1, width=10, text='run', command = self.programmer.run_program)
     # playPhoto=PhotoImage(file="icons/play-icon.gif")
     # Buttons['runProgBut'].config(image=playPhoto,width="60",height="60")
     Buttons['runProgBut'].place(x=20, y=80)
 
-    Buttons['stopProgBut'] = Button(tab1, height=1, width=10, text='stop', command = prog.stop_program)
+    Buttons['stopProgBut'] = Button(tab1, height=1, width=10, text='stop', command = self.programmer.stop_program)
     # stopPhoto=PhotoImage(file="icons/stop-icon.gif")
     # Buttons['stopProgBut'].config(image=stopPhoto,width="60",height="60")
     Buttons['stopProgBut'].place(x=200, y=80)

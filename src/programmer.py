@@ -106,7 +106,7 @@ class Programmer():
     self.add_command(new_cmd, pos)
  
   def waitTime(self):
-    new_cmd = self._commands[0]
+    new_cmd = self._commands[1]
     new_cmd.data = 5 # TODO, get this from somewhere
     self.add_command(new_cmd, -1)    
     
