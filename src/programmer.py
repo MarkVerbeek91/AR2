@@ -6,22 +6,13 @@
 """
 
 import controller
+import program_line
 
 # import threading
 import pickle
 import csv
 
-class program_line():
-  def __init__(self, ID, Desciption, protocol, data, comment):
-    self._ID         = ID
-    self._desciption = Desciption
-    self._protocol   = protocol
-    self.data        = data
-    self.comment     = comment
-    
-  def print_program_line(self):
-    
-    print("%s; %i; %s, %s" % (self.name, self.type, self.data, self.comment))
+
 
 class movement():
   def __init__(self, pos, vel, acc, type):
@@ -62,7 +53,7 @@ class Programmer():
     self._commands = []
     for row in csvID:
       # print(row)
-      new_cmd = program_line(int(row[0]), row[1], row[2], '', '')
+      new_cmd = program_line.Program_line(int(row[0]), row[1], row[2], '', '')
       self._commands.append(new_cmd)
     
     self.number_of_joints = 6
@@ -111,11 +102,11 @@ class Programmer():
     self.controller.executeRow(self.program[var-1])
   
   def insertReturn(self, pos):
-    new_cmd = program_line('return', 1, 'none', '')
+    new_cmd = program_line.Program_line('return', 1, 'none', '')
     self.add_command(new_cmd, pos)
  
   def waitTime(self, pos, waitTime):
-    new_cmd = program_line('wait', 2, waitTime, 'seconds')
+    new_cmd = program_line.Program_line('wait', 2, waitTime, 'seconds')
     add_command(new_cmd, pos)
     
   def teachInsertBelSelected(self):

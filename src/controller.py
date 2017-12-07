@@ -9,6 +9,8 @@
 
 import joint
 import serial_communication as sc
+import program_line
+
 from string import ascii_uppercase
 
 import time
@@ -45,12 +47,13 @@ class Controller():
       
       if self.serCom.is_active:
         cmd = str(program_line._protocol)+str(program_line.data)+'\n'
-        self.serCom.send_command(cmd)
+        response = self.serCom.send_command(cmd)
       else:
         print("Serial Port not open")
     elif program_line._ID == 2:
       """ waiting """
       time.sleep(program_line.data)
+      response = True
     elif program_line._ID == 3:
       """ waiting on input ON """
       wait_time = 1 # seconds
@@ -87,6 +90,10 @@ class Controller():
       print('not doing anything')
     
     self.running = False
+    try:
+      return response
+    except UnboundLocalError:
+      return "command not defined"
   
   def executeProgram(self, program):
     """ Executing program """

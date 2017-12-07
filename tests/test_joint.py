@@ -21,9 +21,9 @@ class Joint_test(unittest.TestCase):
     self.assertEqual(Joint.AngleLimitNegative, 0)
     self.assertEqual(Joint.AngleLimitPositive, 0)
     self.assertEqual(Joint.StepLimit, 0)
-    self.assertEqual(Joint.DegreePerStep, 0)
+    self.assertEqual(Joint._DegreePerStep, 0)
     self.assertEqual(Joint.CurrentStep, 0)
-    self.assertEqual(Joint.CurrentAngle, 0)
+    self.assertEqual(Joint._CurrentAngle, 0)
     
   def test_step_positive(self):
     
