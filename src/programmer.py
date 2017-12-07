@@ -105,22 +105,21 @@ class Programmer():
     new_cmd = program_line.Program_line('return', 1, 'none', '')
     self.add_command(new_cmd, pos)
  
-  def waitTime(self, pos, waitTime):
-    new_cmd = program_line.Program_line('wait', 2, waitTime, 'seconds')
-    add_command(new_cmd, pos)
+  def waitTime(self):
+    new_cmd = self._commands[0]
+    new_cmd.data = 5 # TODO, get this from somewhere
+    self.add_command(new_cmd, -1)    
     
   def teachInsertBelSelected(self):
     print("gallo")
     new_cmd = self._commands[0]
     new_cmd.data = 'some very numbery string'
-    
     self.add_command(new_cmd, -1)
     
- 
   def teachReplaceSelected(self):
-    pass
-    
-  
+    new_cmd = self._commands[0]
+    new_cmd.data = 'some very numbery string'
+    self.add_command(new_cmd, -1)
     
   def waitInputOn(self):
     new_cmd = self._commands[2]
@@ -128,16 +127,24 @@ class Programmer():
     self.add_command(new_cmd, -1)
     
   def waitInputOff(self):
-    pass
+    new_cmd = self._commands[3]
+    new_cmd.data = 'some number'
+    self.add_command(new_cmd, -1)
     
   def setOutputOn(self):
-    pass
+    new_cmd = self._commands[4]
+    new_cmd.data = 'some number'
+    self.add_command(new_cmd, -1)
     
   def setOutputOff(self):
-    pass
+    new_cmd = self._commands[5]
+    new_cmd.data = 'some number'
+    self.add_command(new_cmd, -1)
     
   def tabNumber(self):
-    pass
+    new_cmd = self._commands[6]
+    new_cmd.data = 'some number'
+    self.add_command(new_cmd, -1)
     
     
   def progViewselect(self, line):  

@@ -2,10 +2,10 @@ manEnt,14,1,795,641,grey85,Enter Text,manAddItem,
 teachInsBut,20,1,540,440,grey85,Teach New Position,teachInsertBelSelected
 teachReplaceBut,20,1,540,480,grey85,Modify Position,teachReplaceSelected
 waitTimeBut,20,1,700,360,grey85,Wait Time (seconds),waitTime
-waitInputOnBut,20,1,700,400,grey85,Wait Input ON,
-waitInputOffBut,20,1,700,440,grey85,Wait Input OFF,
-setOutputOnBut,20,1,700,480,grey85,Set Output On,
-setOutputOffBut,20,1,700,520,grey85,Set Output OFF,
+waitInputOnBut,20,1,700,400,grey85,Wait Input ON,waitInputOn
+waitInputOffBut,20,1,700,440,grey85,Wait Input OFF,waitInputOff
+setOutputOnBut,20,1,700,480,grey85,Set Output On,setOutputOn
+setOutputOffBut,20,1,700,520,grey85,Set Output OFF,setOutputOff
 tabNumBut,20,1,920,360,grey85,Create Tab Number,
 jumpTabBut,20,1,920,400,grey85,Jump to Tab,
 IfOnjumpTabBut,20,1,920,480,grey85,If On Jump,
