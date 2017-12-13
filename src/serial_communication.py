@@ -16,13 +16,13 @@ class Serial_communication():
   """ """
 
   def __init__(self, port_number):
-    """ """
-
+    """  """
     self.serial_com  = []
     self.is_active   = False
     self.port_number = port_number
 
   def close(self):
+    """ close com port when open """
     if self.is_active:
       self.serial_com.close()
       self.is_active   = False
@@ -31,13 +31,17 @@ class Serial_communication():
       
   @staticmethod
   def open(self):
-    """ """
-    port = "COM" + str(self.port_number)
-    baud = 9600 
-    self.serial_com = serial.Serial(port, baud)
-    self.is_active  = True
-
+    """ open com port when closed """
+    if not self.is_active
+      port = "COM" + str(self.port_number)
+      baud = 9600 
+      self.serial_com = serial.Serial(port, baud)
+      self.is_active  = True
+    else:
+      print("port was already open")
+      
   def send_command(self, command):
+    """ Send command to port when commands ends with \n """
     if command[-1:] == '\n':
       return self.serial_com.write(command)
     else:

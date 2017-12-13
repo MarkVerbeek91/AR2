@@ -39,6 +39,8 @@ class ProgramView(Frame):
     # scrollbar.pack(side=RIGHT, fill=Y)
     # tab1.progView = Listbox(progframe ,width=64,height=29, yscrollcommand=scrollbar.set)
     
+    # tab1.progView.bind('<<ListboxSelect>>', self.getCurrentSelection)
+    
     for item in ["one", "two", "three", "four"]:
       self.list.insert(END, item)
     
