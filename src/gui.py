@@ -13,10 +13,50 @@ except ImportError:
   from Tkinter import *
   import ttk
 
+  
 import programmer  
 
 import time
 import csv
+
+class ProgramView(Frame):
+
+  def __init__(self, master, program):
+    Frame.__init__(self, master)
+    self.place(x=7,y=174)
+    scrollbar = Scrollbar(master) 
+    scrollbar.pack(side=RIGHT, fill=Y)
+    
+    self.list = Listbox(master, selectmode=EXTENDED, width=64, height=29)
+    self.list.pack(fill=BOTH, expand=1)
+    self.current = None
+    self.program = program
+    self.program_len = len(program)
+    self.poll()
+    
+    # progframe.place(x=7,y=174)
+    # scrollbar = Scrollbar(progframe) 
+    # scrollbar.pack(side=RIGHT, fill=Y)
+    # tab1.progView = Listbox(progframe ,width=64,height=29, yscrollcommand=scrollbar.set)
+    
+    for item in ["one", "two", "three", "four"]:
+      self.list.insert(END, item)
+    
+  def poll(self):
+    programLength = len(self.program)
+    if programLength != self.program_len:
+      print("program has changed")
+      self.program_len = programLength
+      self.program_has_change()
+      
+    self.after(250, self.poll)
+    
+  def program_has_change(self):
+    self.list.delete(0, END)
+    for ii, item in enumerate(self.program):
+      disp_str = str(ii) + ';' + item._desciption + ': ' + str(item.data)
+      self.list.insert(END,disp_str) 
+    self.list.pack()
 
 class GuiAR2():
   """
@@ -62,13 +102,32 @@ class GuiAR2():
 
   def start(self):
     """ Start Main loop to get to program responsive """
+    
     self.tab1.mainloop()
+      
   
-  def updateProgramView(self, var):
+  def updateProgramView(self):      
     self.tab1.progView.delete(0, END)
-    for item in self.programmer.program:
-      self.tab1.progView.insert(END,item._desciption) 
+    for ii, item in enumerate(self.programmer.program):
+      disp_str = str(ii) + ';' + item._desciption + ': ' + str(item.data)
+      self.tab1.progView.insert(END,disp_str) 
     self.tab1.progView.pack()
+  
+    # self.tab1.progView.after(250, self.updateProgramView())
+  
+  def getCurrentSelection(self, var):
+    try: 
+      self.selectedRow = self.tab1.progView.curselection()[0]
+      print(self.selectedRow)
+    except IndexError:
+      self.selectedRow = -1
+
+  
+  def buttonCallBackAndUpdate(self, function):
+    #self.updateProgramView(tab1.progView)
+    # function()
+    print('butttons pressed: %s' % function)
+    self.updateProgramView(self.tab1.progView)
   
   def CreateTab1(self):
     """ Main status and control tap is created here """
@@ -77,20 +136,24 @@ class GuiAR2():
 
     ProgEntryField = Entry(tab1,width=20)
     ProgEntryField.place(x=170, y=45)
-    
+        
     progframe=Frame(tab1)
     progframe.place(x=7,y=174)
-    scrollbar = Scrollbar(progframe) 
-    scrollbar.pack(side=RIGHT, fill=Y)
-    tab1.progView = Listbox(progframe ,width=64,height=29, yscrollcommand=scrollbar.set)
     
-    tab1.progView.bind('<<ListboxSelect>>', self.updateProgramView)
+    self.PV = ProgramView(progframe, self.programmer.program)
+    # scrollbar = Scrollbar(progframe) 
+    # scrollbar.pack(side=RIGHT, fill=Y)
+    # tab1.progView = Listbox(progframe ,width=64,height=29, yscrollcommand=scrollbar.set)
     
-    time.sleep(.2)
+    # tab1.progView = Program_view(tab1)
+
+    # time.sleep(.2)
     
-    self.updateProgramView(tab1.progView)
+    # tab1.progView.bind('<<ListboxSelect>>', self.getCurrentSelection)
     
-    scrollbar.config(command=tab1.progView.yview)
+    # self.updateProgramView(tab1.progView)
+        
+    # scrollbar.config(command=tab1.progView.yview)
     
     # Create Labels
     LabelsTab1 = {}
@@ -160,11 +223,14 @@ class GuiAR2():
     fileID = open('../conf/conf_tab1_buttons.csv')
     csvID  = csv.reader(fileID, delimiter=',')
     
+     
+    
     for row in csvID:
       Buttons[row[0]] = Button(tab1, width=row[1], height=row[2], bg=row[5], text=row[6])
       Buttons[row[0]].place(x=row[3], y=row[4])
     
       if row[7] != '':
+        # lambda x: self.buttonCallBackAndUpdate(getattr(self.programmer, row[7]))
         Buttons[row[0]]['command'] = getattr(self.programmer, row[7])
  
 
