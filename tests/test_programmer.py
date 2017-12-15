@@ -18,12 +18,16 @@ class programmerTestCase(unittest.TestCase):
     """ """
     print("\nCreating new programmer\n")
     self.programmer = programmer.Programmer('')
-    
+    self.programmer.clear_program()
 
     
   def test_class_init(self):
     """ """
     self.assertEqual(self.programmer.program, [])
+    self.assertEqual(self.programmer.current_line, -1)
+    self.assertEqual(len(self.programmer._commands), 15)
+    
+    self.assertEqual(len(self.programmer.controller.joints), self.programmer.number_of_joints)
     
     # open programmer no file exist
     

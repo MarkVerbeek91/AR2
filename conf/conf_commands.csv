@@ -1,15 +1,15 @@
-1, Move, MV
-2, Wait Time, WT
-3, Wait input ON, WN
-4, Wait input OFF, WF
-5, Set Output ON, SN
-6, Set Output OFF, SF
-7, Conditional input ON, CN
-8, Conditional input OFF, CF
-9, Conditional register EQUAL, RE
-10, Conditional register SMALLER, RS
-11, Conditional register BIGGER, RB
-12, start program, XX
-13, marker CREATE, XX
-14, marker JUMP, XX
-15, add comment, XX
+1,MV, Move
+2,WT, Wait Time
+3,WN, Wait input ON
+4,WF, Wait input OFF
+5,SN, Set Output ON
+6,SF, Set Output OFF
+7,CN, Conditional input ON
+8,CF, Conditional input OFF
+9,RE, Conditional register EQUAL
+10,RS, Conditional register SMALLER
+11,RB, Conditional register BIGGER
+12,X1, start program
+13,X2, marker CREATE
+14,X3, marker JUMP
+15,AD, add comment
