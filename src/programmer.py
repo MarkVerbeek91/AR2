@@ -37,7 +37,7 @@ class Programmer():
     self.program = []
     self.current_line = -1
 
-    self.load_program('default')
+    self.load_program("default")
       
       
     # setup controller
@@ -53,14 +53,16 @@ class Programmer():
     folder = "../samples/"
     
     try:
-      self.Prog = pickle.load(open(folder+progName,"rb"))
-    except:
+      self.program = pickle.load(open(folder+program_name,"rb"))
+      print(self.program)
+    except IOError:
+      print("could not find program")
       new_cmd = self._commands['AD']
       new_cmd.comment = '##BEGINNING OF PROGRAM##'
       self.add_command(new_cmd, -1)
       
       try:
-        pickle.dump(self.program,open(folder+progName,"wb"))
+        pickle.dump(self.program,open(folder+program_name,"wb"))
       except:
         pickle.dump(self.program,open(folder+"new","wb"))
     
@@ -117,7 +119,7 @@ class Programmer():
     self.add_command(new_cmd, pos)
 
   def waitTime(self):
-    new_cmd = self._commands[1]
+    new_cmd = self._commands['WT']
     new_cmd.data = 5 # TODO, get this from somewhere
     self.add_command(new_cmd, -1)
 

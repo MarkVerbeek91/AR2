@@ -8,7 +8,6 @@
 try:
   import serial
 except ImportError:
-  print("opening alternative")
   import serial_custom as serial
   # import Serial as serial
 

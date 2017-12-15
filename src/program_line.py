@@ -14,4 +14,6 @@ class Program_line():
     
   def print_program_line(self):
     """ print program line information to screen """
-    print("%s; %i; %s, %s" % (self.name, self.type, self.data, self.comment))
+    
+    return str("%s; %s, %s" % (self._desciption, self.data, self.comment))
+    

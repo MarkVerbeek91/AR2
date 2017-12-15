@@ -41,8 +41,8 @@ class ProgramView(Frame):
     
     # tab1.progView.bind('<<ListboxSelect>>', self.getCurrentSelection)
     
-    for item in ["one", "two", "three", "four"]:
-      self.list.insert(END, item)
+    for ii, item in enumerate(self.program):
+      self.list.insert(END,self.cmdLine2str(ii, item)) 
     
   def poll(self):
     programLength = len(self.program)
@@ -56,9 +56,11 @@ class ProgramView(Frame):
   def program_has_change(self):
     self.list.delete(0, END)
     for ii, item in enumerate(self.program):
-      disp_str = str(ii) + ';' + item._desciption + ': ' + str(item.data)
-      self.list.insert(END,disp_str) 
+      self.list.insert(END,self.cmdLine2str(ii, item)) 
     self.list.pack()
+    
+  def cmdLine2str(self, ii, cmdLine):
+    return str("%d; %s: %s %s" % (ii, cmdLine._desciption, cmdLine.comment, str(cmdLine.data)))
 
 class GuiAR2():
   """
