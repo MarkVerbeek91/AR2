@@ -32,7 +32,7 @@ class Serial_communication():
   @staticmethod
   def open(self):
     """ open com port when closed """
-    if not self.is_active
+    if not self.is_active:
       port = "COM" + str(self.port_number)
       baud = 9600 
       self.serial_com = serial.Serial(port, baud)

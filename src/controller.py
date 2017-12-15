@@ -36,7 +36,8 @@ class Controller():
     print(program_line._ID)
     
     if self.running:
-      print('controller buzy')
+      # print('controller buzy')
+      logging.warning("Controller is buzy")
       return 
     
     self.running = True
