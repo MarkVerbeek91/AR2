@@ -1,9 +1,9 @@
 /*
- * Collection of command function of the AR2 arduino
- * 
- * 
- * 
- */
+   Collection of command function of the AR2 arduino
+
+
+
+*/
 #include <Servo.h>
 #include <ArduinoUnit.h>
 
@@ -16,270 +16,270 @@ test(wirteServerPosition)
 
 void writeServerPosition(int Start, int Stop, int servoNum, int servoPos, Servo servo0)
 {
-  
+
   if (servoNum == 0)
   {
     servo0.write(servoPos);
   }
   /*
-  if (servoNum == 1)
-  {
+    if (servoNum == 1)
+    {
     servo1.write(servoPOS);
-  }
-  if (servoNum == 2)
-  {
+    }
+    if (servoNum == 2)
+    {
     servo2.write(servoPOS);
-  }
-  if (servoNum == 3)
-  {
+    }
+    if (servoNum == 3)
+    {
     servo3.write(servoPOS);
-  }
-  if (servoNum == 4)
-  {
+    }
+    if (servoNum == 4)
+    {
     servo4.write(servoPOS);
-  }
-  if (servoNum == 5)
-  {
+    }
+    if (servoNum == 5)
+    {
     servo5.write(servoPOS);
-  }
-  if (servoNum == 6)
-  {
+    }
+    if (servoNum == 6)
+    {
     servo6.write(servoPOS);
-  }
-  if (servoNum == 7)
-  {
+    }
+    if (servoNum == 7)
+    {
     servo7.write(servoPOS);
-  }
+    }
   */
-  
+
   return;
 }
 
 
 void calibrateRobot(String inData)
 {
+  /*
+    int J1start = inData.indexOf('A');
+    int J2start = inData.indexOf('B');
+    int J3start = inData.indexOf('C');
+    int J4start = inData.indexOf('D');
+    int J5start = inData.indexOf('E');
+    int J6start = inData.indexOf('F');
+    int J1step = (inData.substring(J1start + 1, J2start).toInt()) + 200;
+    int J2step = (inData.substring(J2start + 1, J3start).toInt()) + 200;
+    int J3step = (inData.substring(J3start + 1, J4start).toInt()) + 200;
+    int J4step = (inData.substring(J4start + 1, J5start).toInt()) + 200;
+    int J5step = (inData.substring(J5start + 1, J6start).toInt()) + 200;
+    int J6step = (inData.substring(J6start + 1).toInt()) + 200;
 
-  int J1start = inData.indexOf('A');
-  int J2start = inData.indexOf('B');
-  int J3start = inData.indexOf('C');
-  int J4start = inData.indexOf('D');
-  int J5start = inData.indexOf('E');
-  int J6start = inData.indexOf('F');
-  int J1step = (inData.substring(J1start + 1, J2start).toInt()) + 200;
-  int J2step = (inData.substring(J2start + 1, J3start).toInt()) + 200;
-  int J3step = (inData.substring(J3start + 1, J4start).toInt()) + 200;
-  int J4step = (inData.substring(J4start + 1, J5start).toInt()) + 200;
-  int J5step = (inData.substring(J5start + 1, J6start).toInt()) + 200;
-  int J6step = (inData.substring(J6start + 1).toInt()) + 200;
+    //RESET COUNTERS
+    int J1done = 0;
+    int J2done = 0;
+    int J3done = 0;
+    int J4done = 0;
+    int J5done = 0;
+    int J6done = 0;
 
-  //RESET COUNTERS
-  int J1done = 0;
-  int J2done = 0;
-  int J3done = 0;
-  int J4done = 0;
-  int J5done = 0;
-  int J6done = 0;
+    String J1calStat = "0";
 
-  String J1calStat = "0";
+    //SET DIRECTIONS
+    // J1 //
+    if (J1rotdir == 1 && J1caldir == 1) {
+      digitalWrite(J1dirPin, HIGH);
+    }
+    else if (J1rotdir == 0 && J1caldir == 1) {
+      digitalWrite(J1dirPin, LOW);
+    }
+    else if (J1rotdir == 1 && J1caldir == 0) {
+      digitalWrite(J1dirPin, LOW);
+    }
+    else if (J1rotdir == 0 && J1caldir == 0) {
+      digitalWrite(J1dirPin, HIGH);
+    }
 
-  //SET DIRECTIONS
-  // J1 //
-  if (J1rotdir == 1 && J1caldir == 1) {
-    digitalWrite(J1dirPin, HIGH);
-  }
-  else if (J1rotdir == 0 && J1caldir == 1) {
-    digitalWrite(J1dirPin, LOW);
-  }
-  else if (J1rotdir == 1 && J1caldir == 0) {
-    digitalWrite(J1dirPin, LOW);
-  }
-  else if (J1rotdir == 0 && J1caldir == 0) {
-    digitalWrite(J1dirPin, HIGH);
-  }
+    // J2 //
+    if (J2rotdir == 1 && J2caldir == 1) {
+      digitalWrite(J2dirPin, HIGH);
+    }
+    else if (J2rotdir == 0 && J2caldir == 1) {
+      digitalWrite(J2dirPin, LOW);
+    }
+    else if (J2rotdir == 1 && J2caldir == 0) {
+      digitalWrite(J2dirPin, LOW);
+    }
+    else if (J2rotdir == 0 && J2caldir == 0) {
+      digitalWrite(J2dirPin, HIGH);
+    }
 
-  // J2 //
-  if (J2rotdir == 1 && J2caldir == 1) {
-    digitalWrite(J2dirPin, HIGH);
-  }
-  else if (J2rotdir == 0 && J2caldir == 1) {
-    digitalWrite(J2dirPin, LOW);
-  }
-  else if (J2rotdir == 1 && J2caldir == 0) {
-    digitalWrite(J2dirPin, LOW);
-  }
-  else if (J2rotdir == 0 && J2caldir == 0) {
-    digitalWrite(J2dirPin, HIGH);
-  }
+    // J3 //
+    if (J3rotdir == 1 && J3caldir == 1) {
+      digitalWrite(J3dirPin, HIGH);
+    }
+    else if (J3rotdir == 0 && J3caldir == 1) {
+      digitalWrite(J3dirPin, LOW);
+    }
+    else if (J3rotdir == 1 && J3caldir == 0) {
+      digitalWrite(J3dirPin, LOW);
+    }
+    else if (J3rotdir == 0 && J3caldir == 0) {
+      digitalWrite(J3dirPin, HIGH);
+    }
 
-  // J3 //
-  if (J3rotdir == 1 && J3caldir == 1) {
-    digitalWrite(J3dirPin, HIGH);
-  }
-  else if (J3rotdir == 0 && J3caldir == 1) {
-    digitalWrite(J3dirPin, LOW);
-  }
-  else if (J3rotdir == 1 && J3caldir == 0) {
-    digitalWrite(J3dirPin, LOW);
-  }
-  else if (J3rotdir == 0 && J3caldir == 0) {
-    digitalWrite(J3dirPin, HIGH);
-  }
+    // J4 //
+    if (J4rotdir == 1 && J4caldir == 1) {
+      digitalWrite(J4dirPin, HIGH);
+    }
+    else if (J4rotdir == 0 && J4caldir == 1) {
+      digitalWrite(J4dirPin, LOW);
+    }
+    else if (J4rotdir == 1 && J4caldir == 0) {
+      digitalWrite(J4dirPin, LOW);
+    }
+    else if (J4rotdir == 0 && J4caldir == 0) {
+      digitalWrite(J4dirPin, HIGH);
+    }
 
-  // J4 //
-  if (J4rotdir == 1 && J4caldir == 1) {
-    digitalWrite(J4dirPin, HIGH);
-  }
-  else if (J4rotdir == 0 && J4caldir == 1) {
-    digitalWrite(J4dirPin, LOW);
-  }
-  else if (J4rotdir == 1 && J4caldir == 0) {
-    digitalWrite(J4dirPin, LOW);
-  }
-  else if (J4rotdir == 0 && J4caldir == 0) {
-    digitalWrite(J4dirPin, HIGH);
-  }
+    // J5 //
+    if (J5rotdir == 1 && J5caldir == 1) {
+      digitalWrite(J5dirPin, HIGH);
+    }
+    else if (J5rotdir == 0 && J5caldir == 1) {
+      digitalWrite(J5dirPin, LOW);
+    }
+    else if (J5rotdir == 1 && J5caldir == 0) {
+      digitalWrite(J5dirPin, LOW);
+    }
+    else if (J5rotdir == 0 && J5caldir == 0) {
+      digitalWrite(J5dirPin, HIGH);
+    }
 
-  // J5 //
-  if (J5rotdir == 1 && J5caldir == 1) {
-    digitalWrite(J5dirPin, HIGH);
-  }
-  else if (J5rotdir == 0 && J5caldir == 1) {
-    digitalWrite(J5dirPin, LOW);
-  }
-  else if (J5rotdir == 1 && J5caldir == 0) {
-    digitalWrite(J5dirPin, LOW);
-  }
-  else if (J5rotdir == 0 && J5caldir == 0) {
-    digitalWrite(J5dirPin, HIGH);
-  }
+    // J6 //
+    if (J6rotdir == 1 && J6caldir == 1) {
+      digitalWrite(J6dirPin, HIGH);
+    }
+    else if (J6rotdir == 0 && J6caldir == 1) {
+      digitalWrite(J6dirPin, LOW);
+    }
+    else if (J6rotdir == 1 && J6caldir == 0) {
+      digitalWrite(J6dirPin, LOW);
+    }
+    else if (J6rotdir == 0 && J6caldir == 0) {
+      digitalWrite(J6dirPin, HIGH);
+    }
 
-  // J6 //
-  if (J6rotdir == 1 && J6caldir == 1) {
-    digitalWrite(J6dirPin, HIGH);
-  }
-  else if (J6rotdir == 0 && J6caldir == 1) {
-    digitalWrite(J6dirPin, LOW);
-  }
-  else if (J6rotdir == 1 && J6caldir == 0) {
-    digitalWrite(J6dirPin, LOW);
-  }
-  else if (J6rotdir == 0 && J6caldir == 0) {
-    digitalWrite(J6dirPin, HIGH);
-  }
+    int Speed = 1200;
 
-  int Speed = 1200;
-
-  //DRIVE MOTORS FOR CALIBRATION
-  while (digitalRead(J1calPin) == LOW && J1done < J1step || digitalRead(J2calPin) == LOW && J2done < J2step || digitalRead(J3calPin) == LOW && J3done < J3step || digitalRead(J4calPin) == LOW && J4done < J4step || digitalRead(J5calPin) == LOW && J5done < J5step || digitalRead(J6calPin) == LOW && J6done < J6step)
-  {
-    if (J1done < J1step && (digitalRead(J1calPin) == LOW))
+    //DRIVE MOTORS FOR CALIBRATION
+    while (digitalRead(J1calPin) == LOW && J1done < J1step || digitalRead(J2calPin) == LOW && J2done < J2step || digitalRead(J3calPin) == LOW && J3done < J3step || digitalRead(J4calPin) == LOW && J4done < J4step || digitalRead(J5calPin) == LOW && J5done < J5step || digitalRead(J6calPin) == LOW && J6done < J6step)
+    {
+      if (J1done < J1step && (digitalRead(J1calPin) == LOW))
+      {
+        digitalWrite(J1stepPin, LOW);
+      }
+      delayMicroseconds(5);
+      if (J1done < J1step && (digitalRead(J1calPin) == LOW))
+      {
+        digitalWrite(J1stepPin, HIGH);
+        J1done = ++J1done;
+      }
+      delayMicroseconds(5);
+      if (J2done < J2step && (digitalRead(J2calPin) == LOW))
+      {
+        digitalWrite(J2stepPin, LOW);
+      }
+      delayMicroseconds(5);
+      if (J2done < J2step && (digitalRead(J2calPin) == LOW))
+      {
+        digitalWrite(J2stepPin, HIGH);
+        J2done = ++J2done;
+      }
+      delayMicroseconds(5);
+      if (J3done < J3step && (digitalRead(J3calPin) == LOW))
+      {
+        digitalWrite(J3stepPin, LOW);
+      }
+      delayMicroseconds(5);
+      if (J3done < J3step && (digitalRead(J3calPin) == LOW))
+      {
+        digitalWrite(J3stepPin, HIGH);
+        J3done = ++J3done;
+      }
+      delayMicroseconds(5);
+      if (J4done < J4step && (digitalRead(J4calPin) == LOW))
+      {
+        digitalWrite(J4stepPin, LOW);
+      }
+      delayMicroseconds(5);
+      if (J4done < J4step && (digitalRead(J4calPin) == LOW))
+      {
+        digitalWrite(J4stepPin, HIGH);
+        J4done = ++J4done;
+      }
+      delayMicroseconds(5);
+      if (J5done < J5step && (digitalRead(J5calPin) == LOW))
+      {
+        digitalWrite(J5stepPin, LOW);
+      }
+      delayMicroseconds(5);
+      if (J5done < J5step && (digitalRead(J5calPin) == LOW))
+      {
+        digitalWrite(J5stepPin, HIGH);
+        J5done = ++J5done;;
+      }
+      delayMicroseconds(5);
+      if (J6done < J6step && (digitalRead(J6calPin) == LOW))
+      {
+        digitalWrite(J6stepPin, LOW);
+      }
+      delayMicroseconds(5);
+      if (J6done < J6step && (digitalRead(J6calPin) == LOW))
+      {
+        digitalWrite(J6stepPin, HIGH);
+        J6done = ++J6done;
+      }
+      ///////////////DELAY BEFORE RESTARTING LOOP
+      delayMicroseconds(Speed);
+    }
+    //OVERDRIVE
+    int OvrDrv = 0;
+    while (OvrDrv <= 10)
     {
       digitalWrite(J1stepPin, LOW);
-    }
-    delayMicroseconds(5);
-    if (J1done < J1step && (digitalRead(J1calPin) == LOW))
-    {
-      digitalWrite(J1stepPin, HIGH);
-      J1done = ++J1done;
-    }
-    delayMicroseconds(5);
-    if (J2done < J2step && (digitalRead(J2calPin) == LOW))
-    {
       digitalWrite(J2stepPin, LOW);
-    }
-    delayMicroseconds(5);
-    if (J2done < J2step && (digitalRead(J2calPin) == LOW))
-    {
-      digitalWrite(J2stepPin, HIGH);
-      J2done = ++J2done;
-    }
-    delayMicroseconds(5);
-    if (J3done < J3step && (digitalRead(J3calPin) == LOW))
-    {
       digitalWrite(J3stepPin, LOW);
-    }
-    delayMicroseconds(5);
-    if (J3done < J3step && (digitalRead(J3calPin) == LOW))
-    {
-      digitalWrite(J3stepPin, HIGH);
-      J3done = ++J3done;
-    }
-    delayMicroseconds(5);
-    if (J4done < J4step && (digitalRead(J4calPin) == LOW))
-    {
       digitalWrite(J4stepPin, LOW);
-    }
-    delayMicroseconds(5);
-    if (J4done < J4step && (digitalRead(J4calPin) == LOW))
-    {
-      digitalWrite(J4stepPin, HIGH);
-      J4done = ++J4done;
-    }
-    delayMicroseconds(5);
-    if (J5done < J5step && (digitalRead(J5calPin) == LOW))
-    {
       digitalWrite(J5stepPin, LOW);
-    }
-    delayMicroseconds(5);
-    if (J5done < J5step && (digitalRead(J5calPin) == LOW))
-    {
-      digitalWrite(J5stepPin, HIGH);
-      J5done = ++J5done;;
-    }
-    delayMicroseconds(5);
-    if (J6done < J6step && (digitalRead(J6calPin) == LOW))
-    {
       digitalWrite(J6stepPin, LOW);
-    }
-    delayMicroseconds(5);
-    if (J6done < J6step && (digitalRead(J6calPin) == LOW))
-    {
+      ///////////////DELAY AND SET HIGH
+      delayMicroseconds(Speed);
+      digitalWrite(J1stepPin, HIGH);
+      digitalWrite(J2stepPin, HIGH);
+      digitalWrite(J3stepPin, HIGH);
+      digitalWrite(J4stepPin, HIGH);
+      digitalWrite(J5stepPin, HIGH);
       digitalWrite(J6stepPin, HIGH);
-      J6done = ++J6done;
+      OvrDrv = ++OvrDrv;
+      ///////////////DELAY BEFORE RESTARTING LOOP AND SETTING LOW AGAIN
+      delayMicroseconds(Speed);
     }
-    ///////////////DELAY BEFORE RESTARTING LOOP
-    delayMicroseconds(Speed);
-  }
-  //OVERDRIVE
-  int OvrDrv = 0;
-  while (OvrDrv <= 10)
-  {
-    digitalWrite(J1stepPin, LOW);
-    digitalWrite(J2stepPin, LOW);
-    digitalWrite(J3stepPin, LOW);
-    digitalWrite(J4stepPin, LOW);
-    digitalWrite(J5stepPin, LOW);
-    digitalWrite(J6stepPin, LOW);
-    ///////////////DELAY AND SET HIGH
-    delayMicroseconds(Speed);
-    digitalWrite(J1stepPin, HIGH);
-    digitalWrite(J2stepPin, HIGH);
-    digitalWrite(J3stepPin, HIGH);
-    digitalWrite(J4stepPin, HIGH);
-    digitalWrite(J5stepPin, HIGH);
-    digitalWrite(J6stepPin, HIGH);
-    OvrDrv = ++OvrDrv;
-    ///////////////DELAY BEFORE RESTARTING LOOP AND SETTING LOW AGAIN
-    delayMicroseconds(Speed);
-  }
-  //SEE IF ANY SWITCHES NOT MADE
-  delay(500);
-  if (digitalRead(J1calPin) == HIGH && digitalRead(J2calPin) == HIGH && digitalRead(J3calPin) == HIGH && digitalRead(J4calPin) == HIGH && digitalRead(J4calPin) == HIGH && digitalRead(J5calPin) == HIGH && digitalRead(J6calPin) == HIGH)
-  {
-    Serial.println("pass\n");
-  }
-  else
-  {
-    Serial.println("J1fail\n");
-  }
-  inData = ""; // Clear recieved buffer
-
+    //SEE IF ANY SWITCHES NOT MADE
+    delay(500);
+    if (digitalRead(J1calPin) == HIGH && digitalRead(J2calPin) == HIGH && digitalRead(J3calPin) == HIGH && digitalRead(J4calPin) == HIGH && digitalRead(J4calPin) == HIGH && digitalRead(J5calPin) == HIGH && digitalRead(J6calPin) == HIGH)
+    {
+      Serial.println("pass\n");
+    }
+    else
+    {
+      Serial.println("J1fail\n");
+    }
+    inData = ""; // Clear recieved buffer
+  */
   return;
-} 
+}
 
 void moveRobot(String inData)
 {
-  
+  /*
         int J1start = inData.indexOf('A');
         int J2start = inData.indexOf('B');
         int J3start = inData.indexOf('C');
@@ -995,6 +995,7 @@ void moveRobot(String inData)
         inData = ""; // Clear recieved buffer
         Serial.print("Move Done");
       }
-      
+  */
+  return;
 }
 

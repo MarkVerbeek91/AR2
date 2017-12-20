@@ -59,6 +59,8 @@ const int J4rotdir = 1;
 const int J5rotdir = 0;
 const int J6rotdir = 0;
 
+const int JointRotationDirection[6] = { 0, 0, 0, 1, 0, 0};
+
 // DIRECTION TO RUN MOTORS FOR CALIBRATION // default for AR2 robot = 0,0,1,0,0,1
 ////// if building custom robot and your limit switch is flipped or located on different side of arm / direction this allows
 ////// you to change direction for auto cal - but you must change your joint variable in the AR2.py program to match.
@@ -69,7 +71,7 @@ const int J4caldir = 0;
 const int J5caldir = 0;
 const int J6caldir = 1;
 
-
+const int JointCalibrationDirection[6] = {0, 0, 0, 1, 0, 0};
 
 Servo servo0;
 Servo servo1;
@@ -80,8 +82,12 @@ Servo servo5;
 Servo servo6;
 Servo servo7;
 
+Servo servo[8];
+
 String inData;
 String function;
+
+
 
 const int J1stepPin = 2;
 const int J1dirPin = 3;
@@ -231,22 +237,48 @@ void setup() {
   digitalWrite(J5stepPin, HIGH);
   digitalWrite(J6stepPin, HIGH);
 
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 bool run_tests = true;
 
-test(some_test)
+
+bool switchLED(int counter)
 {
-  assertTrue(true);
+  if (counter > 1000)
+  {
+    if (digitalRead(LED_BUILTIN) == LOW)
+    {
+      digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+    }
+    else
+    {
+      digitalWrite(LED_BUILTIN, LOW);
+    } 
+    return true;   
+  }
+  return false;
 }
+
+test(switchLED)
+{
+  assertFalse(switchLED(0));
+  assertFalse(switchLED(500));
+  assertTrue(switchLED(1001));
+  assertTrue(digitalRead(LED_BUILTIN) == HIGH);
+  assertFalse(switchLED(500));
+  assertTrue(switchLED(1001));
+  assertTrue(digitalRead(LED_BUILTIN) == LOW);
+}
+
 
 void loop() {
 
   if (run_tests)
-  { 
+  {
     Test::run();
   }
-  
+
   //test led
   if (digitalRead(J1calPin) == HIGH || digitalRead(J2calPin) == HIGH || digitalRead(J3calPin) == HIGH || digitalRead(J4calPin) == HIGH || digitalRead(J5calPin) == HIGH || digitalRead(J6calPin) == HIGH)
   {
@@ -256,25 +288,57 @@ void loop() {
   {
     digitalWrite(J6dirPin, LOW);
   }
+  /*
+    for (int ii = 0; ii<6; ii++)
+    {
 
-
-
+    }
+  */
+  int counter = 0;
 
   while (Serial.available() > 0)
   {
+    counter += 1;
+    if (switchLED(counter))
+    {
+      counter = 0;
+    }
+    
+    delay(1000);                       // wait for a second
+    
     char recieved = Serial.read();
     inData += recieved;
     // Process message when new line character is recieved
     if (recieved == '\n')
     {
       String function = inData.substring(0, 2);
+      char var = function[0];
+      /*
+            switch (var)
+            {
+              case "S":
 
+                break;
+              case "O":
 
+                break;
+              case "I":
+
+                break;
+              case "M":
+
+                break;
+              case "X":
+
+                break;
+
+            }
+      */
       //-----COMMAND TO MOVE SERVO---------------------------------------------------
       //-----------------------------------------------------------------------
       if (function == "SV")
       {
-        int SVstart = inData.indexOf('V');
+        int SVstart  = inData.indexOf('V');
         int POSstart = inData.indexOf('P');
         int servoNum = inData.substring(SVstart + 1, POSstart).toInt();
         int servoPOS = inData.substring(POSstart + 1).toInt();
@@ -288,7 +352,7 @@ void loop() {
       //-----------------------------------------------------------------------
       if (function == "WT")
       {
-        int WTstart = inData.indexOf('S');
+        int WTstart    = inData.indexOf('S');
         float WaitTime = inData.substring(WTstart + 1).toFloat();
         int WaitTimeMS = WaitTime * 1000;
         delay(WaitTimeMS);
@@ -299,7 +363,7 @@ void loop() {
       //-----------------------------------------------------------------------
       if (function == "JF")
       {
-        int IJstart = inData.indexOf('X');
+        int IJstart    = inData.indexOf('X');
         int IJTabstart = inData.indexOf('T');
         int IJInputNum = inData.substring(IJstart + 1, IJTabstart).toInt();
         if (digitalRead(IJInputNum) == HIGH)
@@ -315,7 +379,7 @@ void loop() {
       //-----------------------------------------------------------------------
       if (function == "ON")
       {
-        int ONstart = inData.indexOf('X');
+        int ONstart   = inData.indexOf('X');
         int outputNum = inData.substring(ONstart + 1).toInt();
         digitalWrite(outputNum, HIGH);
         Serial.print("Done");
@@ -324,7 +388,7 @@ void loop() {
       //-----------------------------------------------------------------------
       if (function == "OF")
       {
-        int ONstart = inData.indexOf('X');
+        int ONstart   = inData.indexOf('X');
         int outputNum = inData.substring(ONstart + 1).toInt();
         digitalWrite(outputNum, LOW);
         Serial.print("Done");
@@ -333,7 +397,7 @@ void loop() {
       //-----------------------------------------------------------------------
       if (function == "WI")
       {
-        int WIstart = inData.indexOf('N');
+        int WIstart  = inData.indexOf('N');
         int InputNum = inData.substring(WIstart + 1).toInt();
         while (digitalRead(InputNum) == LOW) {
           delay(100);
@@ -344,25 +408,34 @@ void loop() {
       //-----------------------------------------------------------------------
       if (function == "WO")
       {
-        int WIstart = inData.indexOf('N');
+        int WIstart  = inData.indexOf('N');
         int InputNum = inData.substring(WIstart + 1).toInt();
 
         //String InputStr =  String("Input" + InputNum);
         //uint8_t Input = atoi(InputStr.c_str ());
-        while (digitalRead(InputNum) == HIGH) {
+        int timeOut = 10000;
+        while (timeOut > 0)
+        {
+          timeOut -= 100;
+          if (digitalRead(InputNum) == LOW)
+          {
+            Serial.print("Input low");
+            break;
+          }
           delay(100);
         }
-        Serial.print("Done");
+        if ( timeOut < 0 )
+        {
+          Serial.print("TimeOut");
+        }
       }
 
       //-----COMMAND TO CALIBRATE---------------------------------------------------
       //-----------------------------------------------------------------------
       if (function == "LL")
       {
-        calibrateRobot(inData);  
+        calibrateRobot(inData);
       }
-
-
 
       //-----COMMAND TO MOVE---------------------------------------------------
       //-----------------------------------------------------------------------
