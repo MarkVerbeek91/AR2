@@ -313,27 +313,34 @@ void loop() {
     {
       String function = inData.substring(0, 2);
       char var = function[0];
-      /*
-            switch (var)
+      
+            switch (function[0])
             {
-              case "S":
-
-                break;
-              case "O":
-
-                break;
-              case "I":
-
-                break;
               case "M":
-
+                // Main command is move
+               
+    
+                
                 break;
-              case "X":
+              case "W":
+                // Main command is wait
+                switch (function[1])
+                {
+                  case "N" 
+                    
+                    break;
+                  case "F"
+
+                    break;
+                }
+                
+                break;
+              case "S":
 
                 break;
 
             }
-      */
+      
       //-----COMMAND TO MOVE SERVO---------------------------------------------------
       //-----------------------------------------------------------------------
       if (function == "SV")

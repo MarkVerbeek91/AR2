@@ -46,6 +46,7 @@ A (very) short overview of tasks that needed to be done:
 
 - implement functionality in all modules.
 - add tests for all about implemented functionality.
+- add unittest to arduino software
 - restructure c-file for arduino. 
 - update documentation on running, building, etc of all software
 - add documentation to scr files (python and c)
