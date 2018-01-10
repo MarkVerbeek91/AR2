@@ -1,0 +1,36 @@
+@startuml
+actor User
+participant Programmer
+participant Controller
+participant Arduino
+
+== single command ==
+
+User->Programmer: Add command
+User->Programmer: Start program
+Programmer->Controller: send program
+Controller->Arduino: send command
+Arduino->]: servo controller 
+Arduino->Controller: response
+
+== multible commands ==
+
+User->Programmer: Add command
+User->Programmer: Add command
+User->Programmer: Add command
+User->Programmer: Start program
+Programmer->Controller: send program
+Controller->Arduino: send command
+Arduino->]: servo controller 
+Arduino->Controller: response
+Controller->Arduino: send command
+Arduino->]: servo controller 
+Arduino->Controller: response
+Controller->Arduino: send command
+Arduino->]: servo controller 
+Arduino->Controller: response
+
+
+
+@enduml
+
