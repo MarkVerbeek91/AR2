@@ -4,14 +4,21 @@ participant Programmer
 participant Controller
 participant Arduino
 
+activate Programmer
+
 == single command ==
 
 User->Programmer: Add command
 User->Programmer: Start program
 Programmer->Controller: send program
+activate Controller
 Controller->Arduino: send command
+activate Arduino
 Arduino->]: servo controller 
 Arduino->Controller: response
+deactivate Arduino
+deactivate Controller
+
 
 == multible commands ==
 
@@ -20,17 +27,75 @@ User->Programmer: Add command
 User->Programmer: Add command
 User->Programmer: Start program
 Programmer->Controller: send program
+activate Controller
 Controller->Arduino: send command
+activate Arduino
 Arduino->]: servo controller 
 Arduino->Controller: response
+deactivate Arduino
 Controller->Arduino: send command
+activate Arduino
 Arduino->]: servo controller 
 Arduino->Controller: response
+deactivate Arduino
 Controller->Arduino: send command
+activate Arduino
 Arduino->]: servo controller 
 Arduino->Controller: response
+deactivate Arduino
+deactivate Controller
 
+== single command - controller active ==
 
+User->Programmer: Add command
+User->Programmer: Start program
+
+Programmer->Controller: check running state
+Controller->Programmer: response is false
+
+Programmer->Controller: send program
+activate Controller
+Controller->Arduino: send command
+activate Arduino
+
+User->Programmer: Start program
+Programmer->Controller: check running state
+Controller->Programmer: response is true
+Programmer->User: error: controller is buzy
+
+Arduino->]: servo controller 
+Arduino->Controller: response
+deactivate Arduino
+deactivate Controller
+
+== multible command - request for stop ==
+
+User->Programmer: Add command
+User->Programmer: Add command
+User->Programmer: Add command
+User->Programmer: Start program
+Programmer->Controller: send program
+activate Controller
+Controller->Arduino: send command
+activate Arduino
+Arduino->]: servo controller 
+Arduino->Controller: response
+deactivate Arduino
+
+Controller->Controller: check if should continue: true
+
+Controller->Arduino: send command
+activate Arduino
+Arduino->]: servo controller 
+
+User->Programmer: Stop program
+Programmer->Controller: set stop command
+
+Arduino->Controller: response
+deactivate Arduino
+
+Controller->Controller: check if should continue: false
+deactivate Controller
 
 @enduml
 
