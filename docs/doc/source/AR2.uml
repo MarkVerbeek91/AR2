@@ -1,7 +1,9 @@
 @startuml
 Controller --> Joint
 Programmer --> Controller
+Controller --> Program
 Programmer --> Program
+Program    --> Program_line
 Gui --> Programmer
 Controller --> Serial_communications
 
@@ -57,6 +59,13 @@ class Program {
   int CurrentCommand
   List commands
   
+}
+
+class Program_line {
+  int ID
+  string command
+  string comment 
+  var data
 
 }
 

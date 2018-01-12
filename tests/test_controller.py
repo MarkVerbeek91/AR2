@@ -14,12 +14,13 @@ class controllerTestcase(unittest.TestCase):
   
   def setUp(self):
     """ """
-    self.controller = controller.Controller(6)
+    self.nr_joint = 6
+    self.controller = controller.Controller(self.nr_joint)
     
   def test_controllerInit(self):
-    """ """
+    """ Test whether the controller is initialised correctly """
     
-    self.assertEqual(len(self.controller.joints), 6)
+    self.assertEqual(len(self.controller.joints), self.nr_joint)
     self.assertTrue(self.controller.serCom.open)
     self.assertFalse(self.controller.calibrated)
     self.assertFalse(self.controller.running)
@@ -39,6 +40,10 @@ class controllerTestcase(unittest.TestCase):
       if row[0] == 0 and response == row[1]:
         self.assertTrue()
         
+  def test_program1(self):
+    """ Run program 1 """
+  
+    
   
   def test_calibrateRobot(self):
     

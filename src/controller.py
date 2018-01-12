@@ -31,16 +31,14 @@ class Controller():
     self.running    = False
     self.stop       = False
     
+    self.current_line = 0
+    
   def executeRow(self, program_line):
     """ Execute program line """
     print(program_line._ID)
-    
-    if self.running:
-      # print('controller buzy')
-      logging.warning("Controller is buzy")
-      return 
-    
-    self.running = True
+        
+    if not self.calibrateRobot:
+      print("Warning: robot not calibrated")
     
     if program_line._ID == 1:
       """ executing a movement """
@@ -87,10 +85,22 @@ class Controller():
     elif program_line._ID == 11:
       """ Conditional register BIGGER """
       pass
+    elif program_line._ID == 12:
+      """ Start of program (recursive?) """
+      pass
+    elif program_line._ID == 13:
+      """ A marker line, to nothing """
+      pass
+    elif program_line._ID == 14:
+      """ Jump to a marker """
+      
+      pass
+    elif program_line._ID == 15:
+      """ This is a commend ignore """
+      pass
     else:
       print('not doing anything')
     
-    self.running = False
     try:
       return response
     except UnboundLocalError:
@@ -103,13 +113,19 @@ class Controller():
       print('controller busy')
       return
   
-    for prog_line in program:
+    self.current_line = 0
+    self.running = True
+  
+    for prog_line in program._program:
       if not self.stop:
         print(prog_line)
         self.executeRow(prog_line)
+        self.current_line += 1
+        
         time.sleep(1)
       else:
         print('program needed stopping')
+        break
   
     self.running = False
   

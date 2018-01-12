@@ -6,12 +6,15 @@
 """
 
 import controller
+import program
 import program_line
 
 # import threading
 import pickle
 import csv
 import logging
+import threading
+
 
 class Programmer():
 
@@ -34,135 +37,88 @@ class Programmer():
       self._commands[row[1]] = new_cmd
       
     # initialise program
-    self.program = []
-    self.current_line = -1
-
-    self.load_program("default")
-      
-      
+    self.program = program.Program()
+    
     # setup controller
     self.number_of_joints = 6
     self.controller = controller.Controller(self.number_of_joints)
-
-  def clear_program(self):
-    self.program = []
-    
-  def load_program(self, program_name):
-    """ Load program from file into memory """
-    
-    folder = "../samples/"
-    
-    try:
-      self.program = pickle.load(open(folder+program_name,"rb"))
-      print(self.program)
-    except IOError:
-      print("could not find program")
-      new_cmd = self._commands['AD']
-      new_cmd.comment = '##BEGINNING OF PROGRAM##'
-      self.add_command(new_cmd, -1)
-      
-      try:
-        pickle.dump(self.program,open(folder+program_name,"wb"))
-      except:
-        pickle.dump(self.program,open(folder+"new","wb"))
-    
-  
-    
-  def add_command(self, new_cmd, pos):
-    """ Add given command on given position, when pos=-1, append command """
-    if pos == -1:
-      self.program.append(new_cmd)
-      logging.debug("new command is added on program end")
-    else:
-      self.program.insert(pos, new_cmd)
-      logging.debug("new command is added on position %d" % pos)
-
-  def remove_command(self, pos):
-    """ remove last command or command on position pos """
-    if pos == -1:
-      try:
-        self.program.pop()
-      except:
-        return -1
-    else:
-      try:
-        self.program.pop(pos)
-      except :
-        return -1
-
-  def numberOfCommands(self):
-    return len(self.program)
 
   def manAddItem(self):
     print("hello")
 
   def run_program(self):
     print('starting program')
-
+        
+    def threadProg(controller):
     # TODO: start program in threat
-    self.controller.executeProgram(self.program)
+      print(controller)
+      controller.executeProgram(self.program)
 
+    t = threading.Thread(target=threadProg, args=(self.controller,))
+    t.start()
+
+    
   def stop_program(self):
     """ tell the controller to stop when it's running """
     if self.controller.running:
       print('stopping program')
       self.controller.stop = True
     else:
-      print('no programming running')
+      print('no program is running')
 
   def run_program_line(self, var):
     """ let the controller execute a single program line """
-    self.controller.executeRow(self.program[var-1])
+    self.controller.executeRow(self.program, var)
 
   def insertReturn(self, pos):
     new_cmd = program_line.Program_line('return', 1, 'none', '')
-    self.add_command(new_cmd, pos)
+    self.program.add_command(new_cmd, pos)
 
   def waitTime(self):
     new_cmd = self._commands['WT']
     new_cmd.data = 5 # TODO, get this from somewhere
-    self.add_command(new_cmd, -1)
+    self.program.add_command(new_cmd, -1)
 
   def teachInsertBelSelected(self):
     print("gallo")
     new_cmd = self._commands['MV']
     new_cmd.data = 'some very numbery string'
-    self.add_command(new_cmd, -1)
+    self.program.add_command(new_cmd, -1)
 
   def teachReplaceSelected(self):
     new_cmd = self._commands['MV']
     new_cmd.data = 'some very numbery string'
-    self.add_command(new_cmd, -1)
+    self.program.add_command(new_cmd, -1)
 
   def waitInputOn(self):
     new_cmd = self._commands['WN']
     new_cmd.data = 'some number'
-    self.add_command(new_cmd, -1)
+    self.program.add_command(new_cmd, -1)
 
   def waitInputOff(self):
     new_cmd = self._commands['WF']
     new_cmd.data = 'some number'
-    self.add_command(new_cmd, -1)
+    self.program.add_command(new_cmd, -1)
 
   def setOutputOn(self):
     new_cmd = self._commands['SN']
     new_cmd.data = 'some number'
-    self.add_command(new_cmd, -1)
+    self.program.add_command(new_cmd, -1)
 
   def setOutputOff(self):
     new_cmd = self._commands['SF']
     new_cmd.data = 'some number'
-    self.add_command(new_cmd, -1)
+    self.program.add_command(new_cmd, -1)
 
   def tabNumber(self):
     new_cmd = self._commands['X3']
     new_cmd.data = 'some number'
-    self.add_command(new_cmd, -1)
+    self.program.add_command(new_cmd, -1)
 
   def addComment(self):
     new_cmd = self._commands['AD']
     new_cmd.comment = 'default message'
-    self.add_command(new_cmd, -1)
+    self.program.add_command(new_cmd, -1)
     
   def progViewselect(self, line):
     print(line)

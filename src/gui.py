@@ -16,6 +16,7 @@ except ImportError:
   
 import programmer  
 
+
 import time
 import csv
 
@@ -31,7 +32,7 @@ class ProgramView(Frame):
     self.list.pack(fill=BOTH, expand=1)
     self.current = None
     self.program = program
-    self.program_len = len(program)
+    self.program_len = program.numberOfCommands()
     self.poll()
     
     # progframe.place(x=7,y=174)
@@ -41,11 +42,11 @@ class ProgramView(Frame):
     
     # tab1.progView.bind('<<ListboxSelect>>', self.getCurrentSelection)
     
-    for ii, item in enumerate(self.program):
+    for ii, item in enumerate(self.program._program):
       self.list.insert(END,self.cmdLine2str(ii, item)) 
     
   def poll(self):
-    programLength = len(self.program)
+    programLength = self.program.numberOfCommands()
     if programLength != self.program_len:
       print("program has changed")
       self.program_len = programLength
@@ -55,7 +56,7 @@ class ProgramView(Frame):
     
   def program_has_change(self):
     self.list.delete(0, END)
-    for ii, item in enumerate(self.program):
+    for ii, item in enumerate(self.program._program):
       self.list.insert(END,self.cmdLine2str(ii, item)) 
     self.list.pack()
     
