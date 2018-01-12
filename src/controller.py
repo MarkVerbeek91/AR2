@@ -106,7 +106,7 @@ class Controller():
     except UnboundLocalError:
       return "command not defined"
   
-  def executeProgram(self, program):
+  def executeProgram(self, program, program_line_nr = -1):
     """ Executing program """
     
     if self.running:
@@ -115,7 +115,10 @@ class Controller():
   
     self.current_line = 0
     self.running = True
-  
+    
+    if program_line_nr == -1:
+      self.executeRow(program._program[program_line_nr])
+    
     for prog_line in program._program:
       if not self.stop:
         print(prog_line)

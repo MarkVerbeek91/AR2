@@ -20,7 +20,7 @@ class programmerTestCase(unittest.TestCase):
     
   def test_class_init(self):
     """ Test if class is correctly initialised """
-    self.assertIsInstance(self.programmer.program, program)
+    #self.assertIsInstance(self.programmer.program, program)
     self.assertEqual(len(self.programmer._commands), 15)
     
     self.assertEqual(len(self.programmer.controller.joints), 

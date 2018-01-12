@@ -68,7 +68,14 @@ class Programmer():
 
   def run_program_line(self, var):
     """ let the controller execute a single program line """
-    self.controller.executeRow(self.program, var)
+        
+    def threadProg(controller, var):
+    # TODO: start program in threat
+      print(controller)
+      controller.executeProgram(self.program, program_line_nr = var)
+
+    t = threading.Thread(target=threadProg, args=(self.controller, var))
+    t.start()
 
   def insertReturn(self, pos):
     new_cmd = program_line.Program_line('return', 1, 'none', '')
