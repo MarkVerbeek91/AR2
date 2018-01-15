@@ -4,6 +4,9 @@ Programmer --> Controller
 Controller --> Program
 Programmer --> Program
 Program    --> Program_line
+Program_line --> servo_data
+Program_line --> move_data
+
 Gui --> Programmer
 Controller --> Serial_communications
 
@@ -62,11 +65,23 @@ class Program {
 }
 
 class Program_line {
-  int ID
-  string command
-  string comment 
+  int _ID
+  string description
+  string protocol
   var data
+  string comment 
+}
 
+class move_data {
+  int Joint_position[]
+  string movement_type
+  int acceleration
+  int deceleration
+}
+
+class servo_data {
+  int servo_number
+  bool state
 }
 
 class Controller {

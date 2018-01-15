@@ -1,100 +1,110 @@
 @startuml
 actor User
 participant Programmer
+participant Program
 participant Controller
 participant Arduino
+participant Serial_coms
 
+== start up ==
+
+User->Programmer:           init(program_name)
 activate Programmer
+Programmer->Program:        init()
+activate Program
 
 == single command ==
 
-User->Programmer: Add command
-User->Programmer: Start program
-Programmer->Controller: send program
+User->Programmmer:          teachInsertBelSelected()
+User->Program:              add_command(new_cmd, pos)
+User->Programmer:           run_program()
+Programmer->Controller:     executeProgram(program)
 activate Controller
-Controller->Arduino: send command
+' controller->Serial_coms:    init()
+Controller->Arduino:        send_command('SOMESTRING')
 activate Arduino
-Arduino->]: servo controller 
-Arduino->Controller: response
+Arduino->]:                 servo controller 
+Arduino->Controller:        'SOMESTRING_RESPONSE'
 deactivate Arduino
 deactivate Controller
 
 
 == multible commands ==
 
-User->Programmer: Add command
-User->Programmer: Add command
-User->Programmer: Add command
-User->Programmer: Start program
-Programmer->Controller: send program
+User->Programmer:           teachInsertBelSelected()
+User->Programmer:           teachInsertBelSelected()
+User->Programmer:           teachInsertBelSelected()
+User->Programmer:           run_program()
+Programmer->Controller:     executeProgram(program)
 activate Controller
-Controller->Arduino: send command
+Controller->Arduino:        send_command('SOMESTRING')
 activate Arduino
-Arduino->]: servo controller 
-Arduino->Controller: response
+Arduino->]:                 servo controller 
+Arduino->Controller:        'SOMESTRING_RESPONSE'
 deactivate Arduino
-Controller->Arduino: send command
+Controller->Arduino:        send_command('SOMESTRING')
 activate Arduino
 Arduino->]: servo controller 
-Arduino->Controller: response
+Arduino->Controller:        'SOMESTRING_RESPONSE'
 deactivate Arduino
-Controller->Arduino: send command
+Controller->Arduino:        send_command('SOMESTRING')
 activate Arduino
 Arduino->]: servo controller 
-Arduino->Controller: response
+Arduino->Controller:        'SOMESTRING_RESPONSE'
 deactivate Arduino
 deactivate Controller
 
 == single command - controller active ==
 
-User->Programmer: Add command
-User->Programmer: Start program
+User->Programmer:           teachInsertBelSelected()
+User->Programmer:           run_program()
 
-Programmer->Controller: check running state
-Controller->Programmer: response is false
 
-Programmer->Controller: send program
+Programmer->Controller:     executeProgram(program)
 activate Controller
-Controller->Arduino: send command
+Controller->Programmer:     if running; return
+
+Programmer->Controller:     run_program()
+Controller->Arduino:        send_command('SOMESTRING')
 activate Arduino
 
-User->Programmer: Start program
-Programmer->Controller: check running state
-Controller->Programmer: response is true
-Programmer->User: error: controller is buzy
+User->Programmer:           run_program()
+Programmer->Controller:     executeProgram(program)
+Controller->Programmer:     return
+' Programmer->User:           error: controller is buzy
 
 Arduino->]: servo controller 
-Arduino->Controller: response
+Arduino->Controller:        'SOMESTRING_RESPONSE'
 deactivate Arduino
 deactivate Controller
 
 == multible command - request for stop ==
 
-User->Programmer: Add command
-User->Programmer: Add command
-User->Programmer: Add command
-User->Programmer: Start program
-Programmer->Controller: send program
+User->Programmer:           teachInsertBelSelected()
+User->Programmer:           teachInsertBelSelected()
+User->Programmer:           teachInsertBelSelected()
+User->Programmer:           run_program()
+Programmer->Controller:     run_program()
 activate Controller
-Controller->Arduino: send command
+Controller->Arduino:        send_command('SOMESTRING')
 activate Arduino
-Arduino->]: servo controller 
-Arduino->Controller: response
+Arduino->]:                 servo controller 
+Arduino->Controller:        'SOMESTRING_RESPONSE'
 deactivate Arduino
 
-Controller->Controller: check if should continue: true
+Controller->Controller:     if controller.stop 
 
-Controller->Arduino: send command
+Controller->Arduino:        send_command('SOMESTRING')
 activate Arduino
-Arduino->]: servo controller 
+Arduino->]:                 servo controller 
 
-User->Programmer: Stop program
-Programmer->Controller: set stop command
+User->Programmer:           stop_program()
+Programmer->Controller:     controller.stop = True
 
-Arduino->Controller: response
+Arduino->Controller:        'SOMESTRING_RESPONSE'
 deactivate Arduino
 
-Controller->Controller: check if should continue: false
+Controller->Controller:     if controller.stop 
 deactivate Controller
 
 @enduml
