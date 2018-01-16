@@ -20,10 +20,12 @@ class Program():
     
     self.current_line = -1
     self._program = []
+    self.register = [ 0, 0, 0, 0, 0, 0 ]
     
 
   def clear_program(self):
     self._program = []
+    self.register = [ 0, 0, 0, 0, 0, 0 ]
     
   def load_program(self, program_name):
     """ Load program from file into memory """
@@ -39,11 +41,16 @@ class Program():
       new_cmd.comment = '##BEGINNING OF PROGRAM##'
       self.add_command(new_cmd, -1)
       
-      try:
-        pickle.dump(self._program,open(folder+program_name,"wb"))
-      except:
-        pickle.dump(self._program,open(folder+"new","wb"))
+      
+  def save_program(self, program_name):
+    """ """
+    try:
+      pickle.dump(self._program,open(program_name,"wb"))
+    except:
+      pickle.dump(self._program,open("new","wb"))
+  
     
+  
   def add_command(self, new_cmd, pos):
     """ Add given command on given position, when pos=-1, append command """
     if pos == -1:

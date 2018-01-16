@@ -8,6 +8,8 @@
 import controller
 import program
 import program_line
+from program_line import move_data
+from program_line import servo_data
 
 # import threading
 import pickle
@@ -15,10 +17,18 @@ import csv
 import logging
 import threading
 
+class empty_data():
+  """ """
+  
+  def __init__(self):
+    pass
+    
+  def get(self):
+    return ''
 
 class Programmer():
 
-  def __init__(self, progName):
+  def __init__(self, progName = ''):
     """ Load program (not doing anything yet), 
         and fill default command list """
       
@@ -37,6 +47,7 @@ class Programmer():
       self._commands[row[1]] = new_cmd
       
     # initialise program
+    self.program_name = progName
     self.program = program.Program()
     
     # setup controller
@@ -57,6 +68,13 @@ class Programmer():
     t = threading.Thread(target=threadProg, args=(self.controller,))
     t.start()
 
+  def clear_program(self):
+    """ """
+    self.program.clear_program()
+    
+  def save_program(self):
+    """ """
+    self.program.save_program(self.program_name)
     
   def stop_program(self):
     """ tell the controller to stop when it's running """
@@ -87,24 +105,24 @@ class Programmer():
     self.program.add_command(new_cmd, -1)
 
   def teachInsertBelSelected(self):
-    print("gallo")
     new_cmd = self._commands['MV']
     new_cmd.data = 'some very numbery string'
     self.program.add_command(new_cmd, -1)
 
   def teachReplaceSelected(self):
     new_cmd = self._commands['MV']
-    new_cmd.data = 'some very numbery string'
+    pos = [ 1, 2, 3, 4, 5, 6 ]
+    new_cmd.data = move_data.move_data(pos, 'lin', 42, 24)
     self.program.add_command(new_cmd, -1)
 
   def waitInputOn(self):
     new_cmd = self._commands['WN']
-    new_cmd.data = 'some number'
+    new_cmd.data = empty_data()
     self.program.add_command(new_cmd, -1)
 
   def waitInputOff(self):
     new_cmd = self._commands['WF']
-    new_cmd.data = 'some number'
+    new_cmd.data = empty_data()
     self.program.add_command(new_cmd, -1)
 
   def setOutputOn(self):

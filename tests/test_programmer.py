@@ -40,7 +40,7 @@ class programmerTestCase(unittest.TestCase):
        
     self.programmer.teachInsertBelSelected()
 
-    self.programmer.run_program_line(1)
+    #self.programmer.run_program_line(1)
     
     
     

@@ -40,15 +40,18 @@ class Controller():
     if not self.calibrateRobot:
       print("Warning: robot not calibrated")
     
+    if not self.serCom.is_active:
+      print("Serial Port not open")
+      return 
+      
     if program_line._ID == 1:
       """ executing a movement """
-      print('executing something')
       
-      if self.serCom.is_active:
-        cmd = str(program_line._protocol)+str(program_line.data)+'\n'
-        response = self.serCom.send_command(cmd)
-      else:
-        print("Serial Port not open")
+      cmd = program_line.command()+'\n'
+      response = self.serCom.send_command(cmd)
+      
+      
+      
     elif program_line._ID == 2:
       """ waiting """
       time.sleep(program_line.data)
@@ -57,27 +60,33 @@ class Controller():
       """ waiting on input ON """
       wait_time = 1 # seconds
       while not self.stop and wait_time > 0:
-        response = self.serCom.send_command("input status")
+        cmd = program_line.command()+'\n'
+        response = self.serCom.send_command(cmd)
         time.sleep(0.1)
         wait_time -= 0.1
-      pass
+      
     elif program_line._ID == 4:
       """ waiting on input OFF """
+      
       pass
     elif program_line._ID == 5:
       """ setting output ON """
+      
       pass
     elif program_line._ID == 6:
       """ setting output OFF """
+      
       pass
     elif program_line._ID == 7:
       """ Conditional input ON """
+      
       pass
     elif program_line._ID == 8:
       """ Conditional input OFF """
       pass
     elif program_line._ID == 9:
       """ Conditional register EQUAL """
+      
       pass
     elif program_line._ID == 10:
       """ Conditional register SMALLER """
@@ -93,7 +102,7 @@ class Controller():
       pass
     elif program_line._ID == 14:
       """ Jump to a marker """
-      
+      program.current_line = program_line.data
       pass
     elif program_line._ID == 15:
       """ This is a commend ignore """
