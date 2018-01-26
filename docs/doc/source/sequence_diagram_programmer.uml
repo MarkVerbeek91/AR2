@@ -1,9 +1,10 @@
 @startuml
-actor User
-participant Programmer
-participant Program
-participant Controller
-participant Arduino
+
+actor User              #fe5d4a 
+participant Programmer  #1a1a1b
+participant Program     #1a1a1b
+participant Controller  #1a1a1b
+participant Arduino     #00878F
 participant Serial_coms
 
 == start up ==
@@ -15,8 +16,8 @@ activate Program
 
 == single command ==
 
-User->Programmmer:          teachInsertBelSelected()
-User->Program:              add_command(new_cmd, pos)
+User->Programmer:           teachInsertBelSelected()
+Programmer->Program:        add_command(new_cmd, pos)
 User->Programmer:           run_program()
 Programmer->Controller:     executeProgram(program)
 activate Controller
@@ -32,8 +33,11 @@ deactivate Controller
 == multible commands ==
 
 User->Programmer:           teachInsertBelSelected()
+Programmer->Program:        add_command(new_cmd, pos)
 User->Programmer:           teachInsertBelSelected()
+Programmer->Program:        add_command(new_cmd, pos)
 User->Programmer:           teachInsertBelSelected()
+Programmer->Program:        add_command(new_cmd, pos)
 User->Programmer:           run_program()
 Programmer->Controller:     executeProgram(program)
 activate Controller
@@ -57,6 +61,7 @@ deactivate Controller
 == single command - controller active ==
 
 User->Programmer:           teachInsertBelSelected()
+Programmer->Program:        add_command(new_cmd, pos)
 User->Programmer:           run_program()
 
 
@@ -64,7 +69,7 @@ Programmer->Controller:     executeProgram(program)
 activate Controller
 Controller->Programmer:     if running; return
 
-Programmer->Controller:     run_program()
+Programmer->Controller:     executeProgram(program)
 Controller->Arduino:        send_command('SOMESTRING')
 activate Arduino
 
@@ -81,10 +86,13 @@ deactivate Controller
 == multible command - request for stop ==
 
 User->Programmer:           teachInsertBelSelected()
+Programmer->Program:        add_command(new_cmd, pos)
 User->Programmer:           teachInsertBelSelected()
+Programmer->Program:        add_command(new_cmd, pos)
 User->Programmer:           teachInsertBelSelected()
+Programmer->Program:        add_command(new_cmd, pos)
 User->Programmer:           run_program()
-Programmer->Controller:     run_program()
+Programmer->Controller:     executeProgram(program)
 activate Controller
 Controller->Arduino:        send_command('SOMESTRING')
 activate Arduino
