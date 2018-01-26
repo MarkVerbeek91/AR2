@@ -57,10 +57,6 @@ class controllerTestcase(unittest.TestCase):
     """ """
     servo = servo_data(1, False)
   
-   
-  def test_program1(self):
-    """ Run program 1 """
-  
     
   
   def test_calibrateRobot(self):

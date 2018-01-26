@@ -61,7 +61,12 @@ class ProgramView(Frame):
     self.list.pack()
     
   def cmdLine2str(self, ii, cmdLine):
-    return str("%d; %s: %s %s" % (ii, cmdLine._desciption, cmdLine.comment, str(cmdLine.data)))
+    try:
+      tmp = cmdLine.data.get()
+    except AttributeError:
+      tmp = str(cmdLine.data)
+  
+    return str("%d; %s: %s %s" % (ii, cmdLine._desciption, cmdLine.comment, tmp))
 
 class GuiAR2():
   """

@@ -106,13 +106,14 @@ class Programmer():
 
   def teachInsertBelSelected(self):
     new_cmd = self._commands['MV']
-    new_cmd.data = 'some very numbery string'
+    pos = [ 1, 2, 3, 4, 5, 6 ]
+    new_cmd.data = move_data(pos, 'lin', 42, 24)
     self.program.add_command(new_cmd, -1)
 
   def teachReplaceSelected(self):
     new_cmd = self._commands['MV']
     pos = [ 1, 2, 3, 4, 5, 6 ]
-    new_cmd.data = move_data.move_data(pos, 'lin', 42, 24)
+    new_cmd.data = move_data(pos, 'lin', 42, 24)
     self.program.add_command(new_cmd, -1)
 
   def waitInputOn(self):

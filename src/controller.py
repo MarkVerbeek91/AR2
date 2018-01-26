@@ -137,6 +137,7 @@ class Controller():
         time.sleep(1)
       else:
         print('program needed stopping')
+        self.stop = False
         break
   
     self.running = False
