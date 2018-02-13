@@ -17,7 +17,7 @@ import csv
 import logging
 import threading
 
-class empty_data():
+class EmptyData():
     """ """
 
     def __init__(self):
