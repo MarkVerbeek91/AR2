@@ -5,14 +5,15 @@
     And feeds it to the controller when a program is executed.
 """
 
-import program_line
-
 # import threading
 import pickle
 import csv
 import logging
 
+from program_line import ProgramLine
+
 class Program():
+    """ store program lines in nice way plus more """
 
     def __init__(self):
         """ Load program (not doing anything yet),
@@ -20,12 +21,11 @@ class Program():
 
         self.current_line = -1
         self._program = []
-        self.register = [ 0, 0, 0, 0, 0, 0 ]
-
+        self.register = [0, 0, 0, 0, 0, 0]
 
     def clear_program(self):
         self._program = []
-        self.register = [ 0, 0, 0, 0, 0, 0 ]
+        self.register = [0, 0, 0, 0, 0, 0]
 
     def load_program(self, program_name):
         """ Load program from file into memory """
@@ -33,23 +33,23 @@ class Program():
         folder = "../samples/"
 
         try:
-            self._program = pickle.load(open(folder+program_name,"rb"))
-            print(self.program)
+            self._program = pickle.load(open(folder+program_name, "rb"))
+            print(self._program)
         except IOError:
             print("could not find program")
-            new_cmd = self._commands['AD']
+            # TODO: stuff
+            new_cmd = ProgramLine()
             new_cmd.comment = '##BEGINNING OF PROGRAM##'
+            
+            
             self.add_command(new_cmd, -1)
 
-
     def save_program(self, program_name):
-        """ """
+        """ save program to disc """
         try:
-            pickle.dump(self._program,open(program_name,"wb"))
+            pickle.dump(self._program, open(program_name, "wb"))
         except:
-            pickle.dump(self._program,open("new","wb"))
-
-
+            pickle.dump(self._program, open("new", "wb"))
 
     def add_command(self, new_cmd, pos):
         """ Add given command on given position, when pos=-1, append command """
@@ -74,4 +74,5 @@ class Program():
                 return -1
 
     def numberOfCommands(self):
+        """ return length of program """
         return len(self._program)

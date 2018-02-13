@@ -7,9 +7,9 @@
 
 import controller
 import program
-import program_line
-from program_line import move_data
-from program_line import servo_data
+from program_line import ProgramLine
+from program_line import MoveData
+from program_line import ServoData
 
 # import threading
 import pickle
@@ -19,11 +19,11 @@ import threading
 
 class empty_data():
     """ """
-  
+
     def __init__(self):
         """ """
         pass
-    
+
     def get(self):
         """ """
         return ''
@@ -32,13 +32,13 @@ class Programmer():
     """ """
 
     def __init__(self, progName = ''):
-        """ Load program (not doing anything yet), 
+        """ Load program (not doing anything yet),
             and fill default command list """
-      
+
         # setup logging
-        logging.basicConfig(filename='../logs/AR2.warning.log', level=logging.WARNING)    
-        logging.basicConfig(filename='../logs/AR2.debug.log',   level=logging.DEBUG)    
-        logging.basicConfig(filename='../logs/AR2.info.log',    level=logging.INFO)    
+        logging.basicConfig(filename='../logs/AR2.warning.log', level=logging.WARNING)
+        logging.basicConfig(filename='../logs/AR2.debug.log',   level=logging.DEBUG)
+        logging.basicConfig(filename='../logs/AR2.info.log',    level=logging.INFO)
 
         # load protocol
         fileID = open('../conf/conf_commands.csv')
@@ -46,13 +46,13 @@ class Programmer():
 
         self._commands = {}
         for row in csvID:
-            new_cmd = program_line.Program_line(int(row[0]), row[2], row[1], '', '')
+            new_cmd = ProgramLine(int(row[0]), row[2], row[1], '', '')
             self._commands[row[1]] = new_cmd
-      
+
         # initialise program
         self.program_name = progName
         self.program = program.Program()
-        
+
         # setup controller
         self.number_of_joints = 6
         self.controller = controller.Controller(self.number_of_joints)
@@ -62,7 +62,7 @@ class Programmer():
 
     def run_program(self):
         print('starting program')
-        
+
         def threadProg(controller):
             controller.executeProgram(self.program)
 
@@ -72,11 +72,11 @@ class Programmer():
     def clear_program(self):
         """ """
         self.program.clear_program()
-    
+
     def save_program(self):
         """ """
         self.program.save_program(self.program_name)
-    
+
     def stop_program(self):
         """ tell the controller to stop when it's running """
         if self.controller.running:
@@ -87,7 +87,7 @@ class Programmer():
 
     def run_program_line(self, var):
         """ let the controller execute a single program line """
-        
+
         def threadProg(controller, var):
             controller.executeProgram(self.program, program_line_nr = var)
 
@@ -95,7 +95,7 @@ class Programmer():
         t.start()
 
     def insertReturn(self, pos):
-        new_cmd = program_line.Program_line('return', 1, 'none', '')
+        new_cmd = ProgramLine('return', 1, 'none', '')
         self.program.add_command(new_cmd, pos)
 
     def waitTime(self):
@@ -106,13 +106,13 @@ class Programmer():
     def teachInsertBelSelected(self):
         new_cmd = self._commands['MV']
         pos = [ 1, 2, 3, 4, 5, 6 ]
-        new_cmd.data = move_data(pos, 'lin', 42, 24)
+        new_cmd.data = MoveData(pos, 'lin', 42, 24)
         self.program.add_command(new_cmd, -1)
 
     def teachReplaceSelected(self):
         new_cmd = self._commands['MV']
         pos = [ 1, 2, 3, 4, 5, 6 ]
-        new_cmd.data = move_data(pos, 'lin', 42, 24)
+        new_cmd.data = MoveData(pos, 'lin', 42, 24)
         self.program.add_command(new_cmd, -1)
 
     def waitInputOn(self):
@@ -144,6 +144,6 @@ class Programmer():
         new_cmd = self._commands['AD']
         new_cmd.comment = 'default message'
         self.program.add_command(new_cmd, -1)
-    
+
     def progViewselect(self, line):
         print(line)
