@@ -35,7 +35,7 @@ class Controller():
 
     def executeRow(self, program_line):
         """ Execute program line """
-        print(program_line._ID)
+        print(program_line._id)
 
         if not self.calibrateRobot:
             print("Warning: robot not calibrated")
@@ -44,16 +44,16 @@ class Controller():
             print("Serial Port not open")
             return None
 
-        if program_line._ID == 1:
+        if program_line._id == 1:
             # executing a movement
             cmd = program_line.command()+'\n'
             response = self.ser_com.send_command(cmd)
 
-        elif program_line._ID == 2:
+        elif program_line._id == 2:
             # waiting """
             time.sleep(program_line.data)
             response = True
-        elif program_line._ID == 3:
+        elif program_line._id == 3:
             # waiting on input ON """
             wait_time = 1 # seconds
             while not self.stop and wait_time > 0:
@@ -62,48 +62,48 @@ class Controller():
                 time.sleep(0.1)
                 wait_time -= 0.1
 
-        elif program_line._ID == 4:
+        elif program_line._id == 4:
             # waiting on input OFF
 
             pass
-        elif program_line._ID == 5:
+        elif program_line._id == 5:
             # setting output ON
 
             pass
-        elif program_line._ID == 6:
+        elif program_line._id == 6:
             # setting output OFF
 
             pass
-        elif program_line._ID == 7:
+        elif program_line._id == 7:
             # Conditional input ON
 
             pass
-        elif program_line._ID == 8:
+        elif program_line._id == 8:
             # Conditional input OFF
 
             pass
-        elif program_line._ID == 9:
+        elif program_line._id == 9:
             # Conditional register EQUAL
 
             pass
-        elif program_line._ID == 10:
+        elif program_line._id == 10:
             # Conditional register SMALLER
             pass
-        elif program_line._ID == 11:
+        elif program_line._id == 11:
             # Conditional register BIGGER
             pass
-        elif program_line._ID == 12:
+        elif program_line._id == 12:
             # Start of program (recursive?)
             pass
-        elif program_line._ID == 13:
+        elif program_line._id == 13:
             # A marker line, to nothing
 
             pass
-        elif program_line._ID == 14:
+        elif program_line._id == 14:
             # Jump to a marker
             # program.current_line = program_line.data # failty
             pass
-        elif program_line._ID == 15:
+        elif program_line._id == 15:
             # This is a commend ignore
             pass
         else:
@@ -145,7 +145,7 @@ class Controller():
         command = "LL"
 
         for joint in self.joints:
-            command = command + joint.short_name + str(joint.StepLimit)
+            command = command + joint.short_name + str(joint.step_limit_max)
 
             command = command + "\n"
 
@@ -161,7 +161,7 @@ class Controller():
         std = ''
 
         for joint in self.joints:
-            std += str(joint.CurrentStep)
+            std += str(joint.current_step)
 
         print(std)
         return std

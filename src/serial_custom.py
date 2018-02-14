@@ -6,7 +6,7 @@
 """
 
 
-class Serial():
+class Serial(object):
     """ Custrom serial communication class """
 
     def __init__(self, port, baudrate):
