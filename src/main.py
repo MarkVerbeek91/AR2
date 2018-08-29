@@ -1,44 +1,37 @@
-""" 
-  Main script of the AR2 control software
-  
-  A Gui is initiated and started. 
-  
-  Probably the controller and programmer should be started here to...
+"""
+    Main script of the AR2 control software
+
+    A Gui is initiated and started.
+
+    Probably the controller and programmer should be started here to...
 """
 
+from __future__ import print_function
+
 import sys
-import time
 
 import gui
-import joint
-import controller
-import programmer
 
 if sys.platform == 'win32':
-  PLATFORM = 'pc'
-  
-  """ Set variables for pc env
-  """
-  
+    """ Set variables for pc env """
+    PLATFORM = 'pc'
+
 elif sys.platform == 'linux':
-  PLATFORM = 'pi'
-  
-  """ Set variables for pi env
-  """
-  
+    """ Set variables for pi env """
+    PLATFORM = 'pi'
+
 def main():
-  """
-  """
-  
-  # pdb.set_trace()
-  
-  GUI = gui.GuiAR2()
-  GUI.CreateTab1()
-  
-  GUI.start()
-  
-  print('program exited')
+    """ start gui """
+
+    # pdb.set_trace()
+
+    ar2_gui = gui.GuiAR2()
+    ar2_gui.CreateTab1()
+
+    ar2_gui.start()
+
+    print('program exited')
 
 if __name__ == "__main__":
-  main()
-  
+    """ start program """
+    main()

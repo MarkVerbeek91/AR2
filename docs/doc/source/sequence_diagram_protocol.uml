@@ -1,0 +1,51 @@
+@startuml
+
+== move command ==
+note right of Programmer:   move of arm to new position using all joints
+Programmer->Controller:     program_line(1, 'MOVE', 'MV', move_data, 'position 1')
+Controller->Arduino:        'MVA..B..C..D..E..F..X..Y..Z..'
+Arduino->Controller:        'OK'
+
+note over Arduino, Controller
+  A to F is the servo designation, the .. are replace by integers,
+  The X, Y and Z are used for movement type 
+  \nsingle joint = 1, linear movement = 2, etc.
+end note
+
+== move command - single joint ==
+note right of Programmer:   move of joint B to new position
+Programmer->Controller:     program_line(1, 'MOVE', 'MV', move_data, 'position 1')
+Controller->Arduino:        'MVAB..CDEFX..Y..Z..'
+Arduino->Controller:        'OK'
+
+
+== Wait for output on ==
+note right of Programmer:   wait for servo number 1 to turn on 
+Programmer->Controller:     program_line(5, 'Set Output On', 'SN', servo_data, 'close gripper')
+Controller->Arduino:        'WN11'
+Arduino->Controller:        'OK'
+
+note over Arduino, Controller
+  The first 1 is the servo number and the second the state (1 = On, 2 = Off)
+end note
+
+== Wait for output off ==
+note right of Programmer:   wait for servo Nr to turn off
+Programmer->Controller:     program_line(5, 'Set Output On', 'SN', servo_data, 'close gripper')
+Controller->Arduino:        'WN10'
+Arduino->Controller:        'OK'
+
+== Turn servo on ==
+note right of Programmer:   turn servo number 2 on
+Programmer->Controller:     program_line(5, 'Set Output On', 'SN', servo_data, 'close gripper')
+Controller->Arduino:        'SN21'
+Arduino->Controller:        'OK'
+
+== Turn servo off ==
+note right of Programmer:   turn servo number 2 off
+Programmer->Controller:     program_line(5, 'Set Output Off', 'SN', servo_data, 'open gripper')
+Controller->Arduino:        'SN20'
+Arduino->Controller:        'OK'
+
+
+@enduml

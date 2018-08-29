@@ -1,27 +1,29 @@
 """
-  The kinetics class
-  
-  Contains the forward and backward kinetics of the robotic arm. 
-  
-  So far not jet usable and also no configurable
+    The kinetics class
+
+    Contains the forward and backward kinetics of the robotic arm. 
+
+    So far not jet usable and also no configurable
 """
 
 class kinetics():
+    """ """
+    def __init__():
+        """ """
+        self.B = []
+        self.C = []
+        self.D = []
+        self.E = []
+        self.F = []
+        self.F = []
+        self.F = []
 
-  def __init__():
-    self.B = []
-    self.C = []
-    self.D = []
-    self.E = []
-    self.F = []
-    self.F = []
-    self.F = []
 
-
-  def ForwardKinetics(self, joints)
-    for joint in joints:
-      if joint.CurrentAngle == 0:
-        joint.CureentAngle == 0.001
+    def ForwardKinetics(self, joints):
+        """ """
+        for joint in joints:
+            if joint.CurrentAngle == 0:
+                joint.CureentAngle == 0.001
 
     ## CONVERT TO RADIANS
     

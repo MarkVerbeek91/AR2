@@ -11,3 +11,4 @@ MANIFEST
 # documents files
 build
 logs
+*.png

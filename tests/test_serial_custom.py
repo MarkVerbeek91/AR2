@@ -20,12 +20,7 @@ class serialTestcase(unittest.TestCase):
     
     self.assertEqual(self.serial.port, 5)
     self.assertEqual(self.serial.baud, 9600)
-    self.assertFalse(self.serial.active)
-    
-  def test_serialOpen(self):
-    self.serial.open()
-    self.assertTrue(self.serial.active)
-    
+        
   def test_serialWrite(self):
     
     # TODO: added test for arduino behavior here when implemented

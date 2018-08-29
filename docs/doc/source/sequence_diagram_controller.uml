@@ -1,0 +1,51 @@
+@startuml
+
+== move command ==
+note right of Programmer:   move of arm to new position using all joints
+Controller->Arduino:        'MVA..B..C..D..E..F..X..Y..Z..'
+Arduino->servos:            pin switches for 10 ms
+
+... Arduino does stuff till movement is completed ...
+
+Arduino->Controller:        'buzy'
+
+Arduino->servos:            pin switches for 10 ms
+
+... loop ...
+
+Arduino->Controller:        'OK'
+
+
+
+
+
+== Wait for output on ==
+note right of Programmer:   wait for servo number 1 to turn on 
+Controller->Arduino:        'WN11'
+
+Arduino->Controller:        'OK'
+
+note over Arduino, Controller
+	The first 1 is the servo number and the second the state (1 = On, 2 = Off)
+end note
+
+== Wait for output off ==
+note right of Programmer:   wait for servo Nr to turn off
+Programmer->Controller:     program_line(5, 'Set Output On', 'SN', servo_data, 'close gripper')
+Controller->Arduino:        'WN10'
+Arduino->Controller:        'OK'
+
+== Turn servo on ==
+note right of Programmer:   turn servo number 2 on
+Programmer->Controller:     program_line(5, 'Set Output On', 'SN', servo_data, 'close gripper')
+Controller->Arduino:        'SN21'
+Arduino->Controller:        'OK'
+
+== Turn servo off ==
+note right of Programmer:   turn servo number 2 off
+Programmer->Controller:     program_line(5, 'Set Output Off', 'SN', servo_data, 'open gripper')
+Controller->Arduino:        'SN20'
+Arduino->Controller:        'OK'
+
+
+@enduml

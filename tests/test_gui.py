@@ -15,12 +15,12 @@ def assert_gui_creation():
 def test_gui_creation():
   """
   """
-  ar2_gui_obj = GuiAR2.GuiAR2()
-  
+  # ar2_gui_obj = GuiAR2()
+
   assert True
-  
+
 def test_gui_init():
   """
   """
-  
+
 
