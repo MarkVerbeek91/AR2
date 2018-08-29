@@ -2,6 +2,10 @@
 
 ## 6 axis stepper motor robot and control software
 
+https://www.anninrobotics.com/
+
+The AR2 is a small desktop robot that is modeled similar to an industrial 6 axis robot.  This is a DIY project that can be built from 3D printed components or from machined aluminum components, uses low cost stepper motors and arduino controller.
+
 This project includes:
 
 - Bill of materials and instructions
@@ -10,9 +14,9 @@ This project includes:
 - Software to program and operate robot
 - Kinematic model
 
-All geared stepper motors and drivers are available from  [www.omc-stepperonline.com](https://www.omc-stepperonline.com/?tracking=59c1139e8987b) and all other misc. hardware are off-the-shelf items available from multiple sources (see the bill of materials file).
+All geared stepper motors and drivers are available from  [www.omc-stepperonline.com](https://www.omc-stepperonline.com/?tracking=59c1139e8987b) and all other misc. hardware are off-the-shelf items available from multiple sources (see the bill of materials info within each manual).
 
-[![Alt text](https://img.youtube.com/vi/CCgI4R1TEzI/0.jpg)](https://www.youtube.com/watch?v=CCgI4R1TEzI)
+[![Alt text](https://img.youtube.com/vi/EAcU4k2Qskk/0.jpg)](https://www.youtube.com/watch?v=EAcU4k2Qskk)
 
 Startup & Calibration: [Calibration Video](https://youtu.be/MMESgfq2Mjg)
 
@@ -20,8 +24,11 @@ Programming: [Programming Video](https://youtu.be/BozgdjE-HR8)
 
 How the math works: [Kinematic Videos](https://youtu.be/FIx6olybAeQ)
 
-Questions: chris.annin@gmail.com
+Please review all of the videos on programming and calibration,
+I will try to answer as many emails as I can: chris.annin@gmail.com
 #
+Its important to me that this project is free and available to everyone but any donations that
+can help with all that has gone into it would be hugely appreciated.  Thank you very much.
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/ChrisAnnin)
 
 ## Notes by Mark
